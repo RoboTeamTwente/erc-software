@@ -1,8 +1,6 @@
 services:
   ros-desktop:
     image: osrf/ros:kilted-desktop-full
-    profiles:
-      - dev
     environment:
       DISPLAY: ${DISPLAY}
     volumes:
