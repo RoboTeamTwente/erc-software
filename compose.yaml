@@ -3,3 +3,7 @@ services:
     image: osrf/ros:kilted-desktop-full
     profiles:
       - dev
+  gazebo-desktop:
+    image: gazebo
+    profiles:
+      - dev
