@@ -1,6 +1,7 @@
 services:
   ros-desktop:
     image: osrf/ros:kilted-desktop-full
+    command: [gz, sim, shapes.sdf]
     environment:
       DISPLAY: ${DISPLAY}
     volumes:
