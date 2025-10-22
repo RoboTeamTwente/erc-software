@@ -1,10 +1,10 @@
 services:
   ros-desktop:
     image: osrf/ros:kilted-desktop-full
-    command: [gz, sim, shapes.sdf]
+    command: [gz, sim]
     environment:
       DISPLAY: ${DISPLAY}
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-    devices:
-      - /dev/dri
+    runtime: nvidia
+    gpus: all
