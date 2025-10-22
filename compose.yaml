@@ -1,5 +1,5 @@
 services:
-  ros-desktop:
+  sim:
     build: .
     command: [gz, sim]
     environment:
