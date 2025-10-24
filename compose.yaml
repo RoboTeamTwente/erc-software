@@ -1,17 +1,9 @@
 services:
-  sim:
-    build: .
-    command: [gz, sim]
-    environment:
-      DISPLAY: ${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - .:/src
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: cdi
-              capabilities: []
-              device_ids:
-                - nvidia.com/gpu=all
+  talker:
+    image: osrf/ros:kilted-desktop
+    command: ros2 run demo_nodes_cpp talker
+  listener:
+    image: osrf/ros:kilted-desktop
+    command: ros2 run demo_nodes_cpp listener
+    depends_on:
+      - talker
