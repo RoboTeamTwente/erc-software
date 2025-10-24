@@ -13,6 +13,9 @@ std
 # lefthook
 lefthook-local.yaml
 
+# python
+__pycache__/
+
 # nixago: ignore-linked-files
 /lefthook.yml
 /treefmt.toml
