@@ -13,6 +13,7 @@
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
+  <test_depend>gz_sim_vendor</test_depend>
 
   <exec_depend>ros2launch</exec_depend>
 
