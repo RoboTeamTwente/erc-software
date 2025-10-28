@@ -8,10 +8,10 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 add_executable(robot src/robot.cpp)
-target_link_libraries(robot PUBLIC rclcpp::rclcpp ${std_msgs_TARGETS})
+target_link_libraries(robot PUBLIC rclcpp::rclcpp ${sensor_msgs_TARGETS})
 target_include_directories(robot PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
@@ -22,6 +22,8 @@ install(TARGETS robot
 
 install(DIRECTORY
   launch
+  rviz
+  urdf
   worlds
   DESTINATION share/${PROJECT_NAME})
 
