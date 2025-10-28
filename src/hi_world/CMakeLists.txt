@@ -20,6 +20,11 @@ target_compile_features(robot PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++
 install(TARGETS robot
   DESTINATION lib/${PROJECT_NAME})
 
+install(DIRECTORY
+  launch
+  worlds
+  DESTINATION share/${PROJECT_NAME})
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
