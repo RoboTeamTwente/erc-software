@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <node pkg="hi_world" exec="robot" name="robot"/>
+  <gz_server
+    world_sdf_file="$(find-pkg-share hi_world)/worlds/world.sdf"
+    create_own_container="true"
+    use_composition="true">
+  </gz_server>
+  <node pkg="rviz2" exec="rviz2" />
+</launch>
