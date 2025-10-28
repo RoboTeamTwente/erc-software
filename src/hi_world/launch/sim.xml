@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <node pkg="hi_world" exec="robot" name="robot" output="screen"/>
+  <!-- <node pkg="hi_world" exec="robot" name="robot" output="screen"/> -->
+
   <gz_server
-    world_sdf_file="$(find-pkg-share hi_world)/worlds/world.sdf"
-    create_own_container="true"
-    use_composition="true">
-  </gz_server>
-  <node pkg="robot_state_publisher" exec="robot_state_publisher" output="screen">
-    <param name="robot_description" value="$(file-content '$(find-pkg-share hi_world)/urdf/robot.urdf')"/>
+    world_sdf_file="$(find-pkg-share hi_world)/worlds/vehicle.sdf"
+  />
+
+  <node pkg="robot_state_publisher" exec="robot_state_publisher" output="both">
+    <param name="use_sim_time"      value="true"/>
+    <param name="robot_description" value="$(file-content '$(find-pkg-share hi_world)/worlds/model.sdf')"/>
   </node>
-  <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share hi_world)/rviz/sim.rviz"/>
+
+  <ros_gz_bridge bridge_name="bridge">
+    <topic
+      ros_topic_name="/clock"                    gz_topic_name="/clock"
+      ros_type_name="rosgraph_msgs/msg/Clock"    gz_type_name="gz.msgs.Clock"
+      direction="GZ_TO_ROS"
+    />
+    <topic
+      ros_topic_name="/joint_states"             gz_topic_name="/world/demo/model/vehicle/joint_state"
+      ros_type_name="sensor_msgs/msg/JointState" gz_type_name="gz.msgs.Model"
+      direction="GZ_TO_ROS"
+    />
+    <topic
+      ros_topic_name="/tf"                       gz_topic_name="/model/vehicle/pose"
+      ros_type_name="tf2_msgs/msg/TFMessage"     gz_type_name="gz.msgs.Pose_V"
+      direction="GZ_TO_ROS"
+    />
+    <topic
+      ros_topic_name="/tf_static"                gz_topic_name="/model/vehicle/pose_static"
+      ros_type_name="tf2_msgs/msg/TFMessage"     gz_type_name="gz.msgs.Pose_V"
+      direction="GZ_TO_ROS"
+    />
+    <param name="qos_overrides./tf_static.publisher.durability" value="transient_local"/>
+    <topic
+      ros_topic_name="/model/vehicle/cmd_vel"    gz_topic_name="/model/vehicle/cmd_vel"
+      ros_type_name="geometry_msgs/msg/Twist"    gz_type_name="gz.msgs.Twist"
+      direction="ROS_TO_GZ"
+    />
+    <topic
+      ros_topic_name="/model/vehicle/odometry"   gz_topic_name="/model/vehicle/odometry"
+      ros_type_name="nav_msgs/msg/Odometry"      gz_type_name="gz.msgs.Odometry"
+      direction="GZ_TO_ROS"
+    />
+  </ros_gz_bridge>
+
+  <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share hi_world)/rviz/sim.rviz">
+    <param name="use_sim_time" value="true"/>
+  </node>
+  <executable cmd="gz sim -g --render-engine ogre" output="screen"/>
 </launch>
