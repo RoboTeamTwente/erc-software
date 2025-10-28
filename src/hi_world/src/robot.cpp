@@ -14,7 +14,9 @@ public:
 
     timer_ = create_wall_timer(33ms, [this]() {
       auto msg = sensor_msgs::msg::JointState();
-      msg.position = {0, 0, 0};
+      msg.header.stamp = get_clock()->now();
+      msg.name = {"swivel", "tilt", "periscope"}; // joints being published
+      msg.position = {0, 0, 0};                   // joints values
       publisher_->publish(msg);
       RCLCPP_INFO(get_logger(), "Published: %lf %lf %lf", msg.position[0],
                   msg.position[1], msg.position[2]);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <node pkg="hi_world" exec="robot" name="robot"/>
+  <node pkg="hi_world" exec="robot" name="robot" output="screen"/>
   <gz_server
     world_sdf_file="$(find-pkg-share hi_world)/worlds/world.sdf"
     create_own_container="true"
@@ -9,5 +9,5 @@
   <node pkg="robot_state_publisher" exec="robot_state_publisher" output="screen">
     <param name="robot_description" value="$(file-content '$(find-pkg-share hi_world)/urdf/robot.urdf')"/>
   </node>
-  <node pkg="rviz2" exec="rviz2"/>
+  <node pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share hi_world)/rviz/sim.rviz"/>
 </launch>
