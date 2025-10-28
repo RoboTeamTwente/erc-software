@@ -1,0 +1,5 @@
+build:
+  mixin:
+    - clang
+    - compile-commands
+    - ninja
