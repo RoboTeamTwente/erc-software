@@ -6,5 +6,8 @@
     create_own_container="true"
     use_composition="true">
   </gz_server>
-  <node pkg="rviz2" exec="rviz2" />
+  <node pkg="robot_state_publisher" exec="robot_state_publisher" output="screen">
+    <param name="robot_description" value="$(file-content '$(find-pkg-share hi_world)/urdf/robot.urdf')"/>
+  </node>
+  <node pkg="rviz2" exec="rviz2"/>
 </launch>
