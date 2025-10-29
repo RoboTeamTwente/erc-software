@@ -10,7 +10,7 @@ ament_auto_find_build_dependencies()
 
 pluginlib_export_plugin_description_file(webots_ros2_driver plugin.xml)
 
-ament_auto_add_library(robot DIRECTORY src)
+ament_auto_add_library(robot SHARED DIRECTORY src)
 
 install(DIRECTORY
   launch
