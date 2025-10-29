@@ -1,8 +1,11 @@
+#include "geometry_msgs/msg/twist.hpp"
 #include <cmath>
 #include <geometry_msgs/msg/twist.hpp>
+#include <memory>
 #include <rclcpp/logger.hpp>
 #include <rclcpp/logging.hpp>
 #include <rclcpp/qos.hpp>
+#include <rclcpp/subscription.hpp>
 #include <webots/Device.hpp>
 #include <webots/Motor.hpp>
 #include <webots/Robot.hpp>
@@ -31,7 +34,7 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
     wb_motor_set_velocity(wheel_left_, 0);
     wb_motor_set_velocity(wheel_right_, 0);
 
-    auto cmd_vel_sub_ = node_->create_subscription<geometry_msgs::msg::Twist>(
+    cmd_vel_sub_ = node_->create_subscription<geometry_msgs::msg::Twist>(
         "/cmd_vel", rclcpp::SensorDataQoS().reliable(),
         [this](std::shared_ptr<geometry_msgs::msg::Twist const> msg) {
           RCLCPP_INFO(node_->get_logger(), "got twist %lf %lf", msg->linear.x,
@@ -39,6 +42,9 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
           cmd_vel_.linear = msg->linear;
           cmd_vel_.angular = msg->angular;
         });
+
+    RCLCPP_INFO(node_->get_logger(), "sub created %p",
+                (void *)cmd_vel_sub_.get());
   }
 
   void step() override {
@@ -61,6 +67,7 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
 private:
   webots_ros2_driver::WebotsNode *node_;
   WbDeviceTag wheel_left_, wheel_right_;
+  std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::Twist>> cmd_vel_sub_;
   geometry_msgs::msg::Twist cmd_vel_;
 };
 
