@@ -7,15 +7,13 @@ WORKDIR /ws
 ADD https://cyberbotics.com/Cyberbotics.asc /etc/apt/keyrings/Cyberbotics.asc
 RUN chown _apt /etc/apt/keyrings/Cyberbotics.asc
 
-COPY --parents src/*/package.xml .
 RUN <<EOF
-set -eux
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/Cyberbotics.asc] https://cyberbotics.com/debian binary-amd64/" > /etc/apt/sources.list.d/Cyberbotics.list
 apt-get update
-apt-get upgrade -y webots
-rosdep install --from-path --ignore-src -y /ws/src
-# apt-get clean
-# rm -rf /var/lib/apt/lists/*
 EOF
+RUN apt-get upgrade -y webots
+
+COPY --parents src/*/package.xml .
+RUN rosdep install --from-path --ignore-src -y /ws/src
 
 CMD ["sleep", "inf"]
