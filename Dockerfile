@@ -12,7 +12,7 @@ RUN <<EOF
 set -eux
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/Cyberbotics.asc] https://cyberbotics.com/debian binary-amd64/" > /etc/apt/sources.list.d/Cyberbotics.list
 apt-get update
-apt-get install -y webots
+apt-get upgrade -y webots
 rosdep install --from-path --ignore-src -y /ws/src
 # apt-get clean
 # rm -rf /var/lib/apt/lists/*
