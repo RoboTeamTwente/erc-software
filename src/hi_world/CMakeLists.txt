@@ -22,6 +22,7 @@ install(TARGETS robot
 
 install(DIRECTORY
   launch
+  models
   rviz
   urdf
   worlds
@@ -38,5 +39,8 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+# add models folder to Gazebo's path when in development
+ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/hooks/add_gazebo_models_to_path.dsv.in")
 
 ament_package()
