@@ -5,27 +5,20 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# find dependencies
-find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(sensor_msgs REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
-add_executable(robot src/robot.cpp)
-target_link_libraries(robot PUBLIC rclcpp::rclcpp ${sensor_msgs_TARGETS})
-target_include_directories(robot PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
-target_compile_features(robot PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+pluginlib_export_plugin_description_file(webots_ros2_driver plugin.xml)
 
-install(TARGETS robot
-  DESTINATION lib/${PROJECT_NAME})
+ament_auto_add_library(robot DIRECTORY src)
 
 install(DIRECTORY
   launch
   models
   rviz
   worlds
-  DESTINATION share/${PROJECT_NAME})
+  DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -39,7 +32,4 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-# add models folder to Gazebo's path when in development
-ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/hooks/add_gazebo_models_to_path.dsv.in")
-
-ament_package()
+ament_auto_package()
