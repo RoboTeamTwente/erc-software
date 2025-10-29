@@ -12,7 +12,11 @@ nixpkgs.lib.mapAttrs (_: mkShell) {
     imports = [
       std.devshellProfiles.default
     ];
-    packages = [ nixpkgs.skopeo ];
+    packages = [
+      nixpkgs.clang-tools
+      nixpkgs.clang
+      nixpkgs.skopeo
+    ];
     commands = [
       { package = nixpkgs.gh; }
       { package = nixpkgs.git-cliff; }
