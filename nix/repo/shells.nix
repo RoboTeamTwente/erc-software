@@ -16,6 +16,7 @@ nixpkgs.lib.mapAttrs (_: mkShell) {
     commands = [
       { package = nixpkgs.cocogitto; }
       { package = nixpkgs.gh; }
+      { package = nixpkgs.git-town; }
       { package = nixpkgs.just; }
     ];
     nixago = [
