@@ -7,8 +7,8 @@
 #include <rclcpp/qos.hpp>
 #include <rclcpp/subscription.hpp>
 #include <webots/Device.hpp>
-#include <webots/Motor.hpp>
-#include <webots/Robot.hpp>
+#include <webots/camera.h>
+#include <webots/gps.h>
 #include <webots/motor.h>
 #include <webots/robot.h>
 #include <webots_ros2_driver/PluginInterface.hpp>
@@ -25,14 +25,25 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
 
     RCLCPP_INFO(rclcpp::get_logger("robot_driver"), "hi world");
 
-    wheel_left_ = wb_robot_get_device("left wheel motor");
-    wheel_right_ = wb_robot_get_device("right wheel motor");
+    gps_ = wb_robot_get_device("gps");
+    cam_ = wb_robot_get_device("camera");
 
-    wb_motor_set_position(wheel_left_, INFINITY);
-    wb_motor_set_position(wheel_right_, INFINITY);
+    wb_camera_enable(cam_, 15 /* FPS */);
 
-    wb_motor_set_velocity(wheel_left_, 0);
-    wb_motor_set_velocity(wheel_right_, 0);
+    wheel_fl_ = wb_robot_get_device("front left wheel motor");
+    wheel_fr_ = wb_robot_get_device("front right wheel motor");
+    wheel_hl_ = wb_robot_get_device("hind left wheel motor");
+    wheel_hr_ = wb_robot_get_device("hind right wheel motor");
+
+    wb_motor_set_position(wheel_fl_, INFINITY);
+    wb_motor_set_position(wheel_fr_, INFINITY);
+    wb_motor_set_position(wheel_hl_, INFINITY);
+    wb_motor_set_position(wheel_hr_, INFINITY);
+
+    wb_motor_set_velocity(wheel_fl_, 0);
+    wb_motor_set_velocity(wheel_fr_, 0);
+    wb_motor_set_velocity(wheel_hl_, 0);
+    wb_motor_set_velocity(wheel_hr_, 0);
 
     cmd_vel_sub_ = node_->create_subscription<geometry_msgs::msg::Twist>(
         "/cmd_vel", rclcpp::SensorDataQoS().reliable(),
@@ -57,8 +68,10 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
     auto lvel = (fwd - rot * HALF_WHEEL_SEPARATION) / WHEEL_RADIUS;
     auto rvel = (fwd + rot * HALF_WHEEL_SEPARATION) / WHEEL_RADIUS;
 
-    wb_motor_set_velocity(wheel_left_, lvel);
-    wb_motor_set_velocity(wheel_right_, rvel);
+    wb_motor_set_velocity(wheel_fl_, lvel);
+    wb_motor_set_velocity(wheel_fr_, rvel);
+    wb_motor_set_velocity(wheel_hl_, lvel);
+    wb_motor_set_velocity(wheel_hr_, rvel);
 
     RCLCPP_INFO(node_->get_logger(), "step %lf %lf", cmd_vel_.linear.x,
                 cmd_vel_.angular.z);
@@ -66,7 +79,7 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
 
 private:
   webots_ros2_driver::WebotsNode *node_;
-  WbDeviceTag wheel_left_, wheel_right_;
+  WbDeviceTag gps_, cam_, wheel_fl_, wheel_fr_, wheel_hl_, wheel_hr_;
   std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::Twist>> cmd_vel_sub_;
   geometry_msgs::msg::Twist cmd_vel_;
 };
