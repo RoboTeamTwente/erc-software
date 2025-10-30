@@ -3,3 +3,10 @@
 [branches]
 main = "develop"
 perennials = ["main"]
+
+[create]
+share-new-branches = "push"
+
+[sync]
+feature-strategy = "rebase"
+prototype-strategy = "rebase"
