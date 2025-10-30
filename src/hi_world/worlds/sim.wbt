@@ -1,0 +1,143 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.134276866032418 -0.06820806871995992 0.9885936387667106 4.072359819278989
+  position 2.2190238470559693 3.1156036710279627 1.1438527812340569
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 10 10
+}
+Robot {
+  translation 0 0 0.05
+  children [
+    Camera {
+      translation 0.151 0 0.05
+      recognition Recognition {
+      }
+    }
+    GPS {
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.2 0
+      }
+      device [
+        RotationalMotor {
+          name "front left wheel motor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.10000000000000012 0.11500000000000017 2.6469779601696886e-23
+        rotation 0.9999999999999999 -2.99590480301515e-22 5.9918096060303e-22 1.5700013336403513
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 0 0
+              roughness 1
+            }
+            geometry Cylinder {
+              height 0.03
+              radius 0.05
+            }
+          }
+        ]
+        name "front left wheel"
+        boundingObject USE WHEEL
+        physics DEF WHEEL_PHYSICS Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.2 0
+      }
+      device [
+        RotationalMotor {
+          name "front right wheel motor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.10000000000000006 -0.1149999999999991 0
+        rotation 1 -5.991798782268575e-22 1.9634525429615892e-17 1.5700049436314323
+        children [
+          USE WHEEL
+        ]
+        name "front right wheel"
+        boundingObject USE WHEEL
+        physics USE WHEEL_PHYSICS
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.2 0
+      }
+      device [
+        RotationalMotor {
+          name "hind left wheel motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.09999999999999974 0.11500000000000045 1.0587911840678754e-22
+        rotation 0.9999999999999999 -1.9632463759216254e-17 2.995904802187705e-22 1.5700013341922965
+        children [
+          USE WHEEL
+        ]
+        name "hind left wheel"
+        boundingObject USE WHEEL
+        physics USE WHEEL_PHYSICS
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.2 0
+      }
+      device [
+        RotationalMotor {
+          name "hind right wheel motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.10000000000000021 -0.11499999999999955 3.469552831072021e-18
+        rotation 1 5.991798784912725e-22 -5.991798784912725e-22 1.5700049427495406
+        children [
+          USE WHEEL
+        ]
+        name "hind right wheel"
+        boundingObject USE WHEEL
+        physics USE WHEEL_PHYSICS
+      }
+    }
+    DEF BODY Pose {
+      translation 0 0 0.05
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 0.75
+          }
+          geometry Box {
+            size 0.3 0.2 0.1
+          }
+        }
+      ]
+    }
+  ]
+  name "Rover"
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "<extern>"
+}
