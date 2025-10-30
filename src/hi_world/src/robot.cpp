@@ -1,4 +1,3 @@
-#include "geometry_msgs/msg/twist.hpp"
 #include <cmath>
 #include <geometry_msgs/msg/twist.hpp>
 #include <memory>
@@ -6,8 +5,8 @@
 #include <rclcpp/logging.hpp>
 #include <rclcpp/qos.hpp>
 #include <rclcpp/subscription.hpp>
-#include <webots/Device.hpp>
 #include <webots/camera.h>
+#include <webots/device.h>
 #include <webots/gps.h>
 #include <webots/motor.h>
 #include <webots/robot.h>
@@ -18,8 +17,7 @@ namespace hi_world {
 
 class RobotDriver : public webots_ros2_driver::PluginInterface {
   void init(webots_ros2_driver::WebotsNode *node,
-            [[maybe_unused]] std::unordered_map<std::string, std::string>
-                &parameters) override {
+            std::unordered_map<std::string, std::string> &) override {
 
     node_ = node;
 
