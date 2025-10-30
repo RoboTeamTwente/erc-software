@@ -2,7 +2,7 @@
 
 [branches]
 main = "develop"
-perennials = ["main"]
+perennials = ["current"]
 
 [create]
 share-new-branches = "push"
