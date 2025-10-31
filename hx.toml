@@ -1,5 +1,14 @@
-theme = 'base16_terminal'
+theme = 'gruvbox'
 
 [editor]
 auto-format = true
-file-picker.hidden = true
+true-color = true
+
+[editor.whitespace]
+render = 'all'
+
+[editor.indent-guides]
+render = true
+
+[editor.file-picker]
+hidden = false # this actually *enables* hidden files ffs
