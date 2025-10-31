@@ -107,14 +107,15 @@ Robot {
           }
           device [
             RotationalMotor {
-              name "right middle wheel motor"
+              name "right back wheel motor"
             }
           ]
           endPoint Solid {
+            translation -0.575 0 0
             children [
               USE WHEEL
             ]
-            name "right middle wheel"
+            name "right back wheel"
             boundingObject USE WHEEL
             physics USE WHEEL_PHYSICS
           }
@@ -125,15 +126,14 @@ Robot {
           }
           device [
             RotationalMotor {
-              name "right back wheel motor"
+              name "right middle wheel motor"
             }
           ]
           endPoint Solid {
-            translation -0.575 0 0
             children [
               USE WHEEL
             ]
-            name "right back wheel"
+            name "right middle wheel"
             boundingObject USE WHEEL
             physics USE WHEEL_PHYSICS
           }
