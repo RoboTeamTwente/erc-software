@@ -21,6 +21,7 @@ def generate_launch_description():
         parameters=[
             {"robot_description": urdf_path},
         ],
+        respawn=True,
     )
 
     return LaunchDescription(
