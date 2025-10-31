@@ -79,8 +79,8 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
     wb_motor_set_velocity(wheel_mr_, rvel);
     wb_motor_set_velocity(wheel_fr_, rvel);
 
-    RCLCPP_INFO(node_->get_logger(), "step %lf %lf", cmd_vel_.linear.x,
-                cmd_vel_.angular.z);
+    // RCLCPP_INFO(node_->get_logger(), "step %lf %lf", cmd_vel_.linear.x,
+    //             cmd_vel_.angular.z);
   }
 
 private:
