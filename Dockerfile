@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7-labs
 # needed until COPY --parents is available in stable
 
-FROM osrf/ros:rolling-desktop-full
+FROM osrf/ros:kilted-desktop-full
 WORKDIR /ws
 
 ADD https://github.com/helix-editor/helix/releases/download/25.07.1/helix_25.7.1-1_amd64.deb /tmp/helix.deb
