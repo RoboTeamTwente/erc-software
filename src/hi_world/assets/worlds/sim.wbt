@@ -27,6 +27,9 @@ Robot {
       rotation 1 0 0 1.5708
       children [
         HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "left back wheel motor"
@@ -53,6 +56,9 @@ Robot {
           }
         }
         HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "left middle wheel motor"
@@ -68,6 +74,9 @@ Robot {
           }
         }
         HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "left front wheel motor"
@@ -90,6 +99,9 @@ Robot {
       rotation 1 0 0 -1.57
       children [
         HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "right middle wheel motor"
@@ -105,6 +117,9 @@ Robot {
           }
         }
         HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "right back wheel motor"
@@ -121,6 +136,9 @@ Robot {
           }
         }
         HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "right front wheel motor"
