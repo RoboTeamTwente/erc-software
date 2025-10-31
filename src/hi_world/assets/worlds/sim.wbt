@@ -59,7 +59,6 @@ Robot {
         HingeJoint {
           jointParameters HingeJointParameters {
             axis 0 0 1
-            anchor -0.575 0 0
           }
           device [
             RotationalMotor {
@@ -78,7 +77,7 @@ Robot {
         HingeJoint {
           jointParameters HingeJointParameters {
             axis 0 0 1
-            anchor -0.575 0 0
+            anchor 0.575 0 0
           }
           device [
             RotationalMotor {
@@ -123,7 +122,6 @@ Robot {
         HingeJoint {
           jointParameters HingeJointParameters {
             axis 0 0 1
-            anchor -0.575 0 0
           }
           device [
             RotationalMotor {
@@ -143,7 +141,7 @@ Robot {
         HingeJoint {
           jointParameters HingeJointParameters {
             axis 0 0 1
-            anchor -0.575 0 0
+            anchor 0.575 0 0
           }
           device [
             RotationalMotor {
