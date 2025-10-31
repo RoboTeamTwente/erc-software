@@ -29,6 +29,8 @@ def generate_launch_description():
             webots,
             webots._supervisor,
             robot_driver,
+
+            # shut down when webots exits
             launch.actions.RegisterEventHandler(
                 event_handler=launch.event_handlers.OnProcessExit(
                     target_action=webots,
