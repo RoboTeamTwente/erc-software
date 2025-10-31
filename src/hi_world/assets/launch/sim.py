@@ -11,7 +11,10 @@ def generate_launch_description():
     package_dir = Path(get_package_share_directory("hi_world"))
     urdf_path = package_dir / "models" / "robot.urdf"
 
-    webots = WebotsLauncher(world=package_dir / "worlds" / "sim.wbt")
+    webots = WebotsLauncher(
+        world=package_dir / "worlds" / "sim.wbt",
+        ros2_supervisor=True,
+    )
 
     robot_driver = WebotsController(
         robot_name="Rover",
@@ -23,6 +26,7 @@ def generate_launch_description():
     return LaunchDescription(
         [
             webots,
+            webots._supervisor,
             robot_driver,
             launch.actions.RegisterEventHandler(
                 event_handler=launch.event_handlers.OnProcessExit(
