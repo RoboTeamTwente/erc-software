@@ -19,7 +19,10 @@ def generate_launch_description():
     robot_driver = WebotsController(
         robot_name="Rover",
         parameters=[
-            {"robot_description": urdf_path},
+            {
+                "robot_description": urdf_path,
+                "set_robot_state_publisher": True,
+            },
         ],
         respawn=True,
     )
