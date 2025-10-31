@@ -21,6 +21,3 @@ COPY --parents src/*/package.xml .
 RUN rosdep install --from-path --ignore-src -y /ws/src
 
 CMD ["sleep", "inf"]
-
-TODO: progress report for reveal deay, to show that we're not doing nothing
-TODO: could: interactive sim for events
