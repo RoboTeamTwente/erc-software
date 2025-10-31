@@ -1,26 +1,4 @@
-# std
-.bin
-.cache
-.config
-.data
-result
-.run
-std
-
-# direnv
-.direnv
-
-# lefthook
-lefthook-local.yaml
-
-# python
-__pycache__/
-
 # colcon
 /build/
 /install/
 /log/
-
-# nixago: ignore-linked-files
-/lefthook.yml
-/treefmt.toml
