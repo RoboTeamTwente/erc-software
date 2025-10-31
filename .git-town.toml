@@ -1,12 +1,4 @@
 # See https://www.git-town.com/configuration-file for details
 
 [branches]
-main = "develop"
-perennials = ["current"]
-
-[create]
-share-new-branches = "push"
-
-[sync]
-feature-strategy = "rebase"
-prototype-strategy = "rebase"
+main = "main"
