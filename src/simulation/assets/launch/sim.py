@@ -70,6 +70,7 @@ def generate_launch_description():
             Node(
                 package="rviz2",
                 executable="rviz2",
+                parameters=[{"use_sim_time": True}],
                 condition=IfCondition(LaunchConfiguration("rviz")),
             ),
         ]
