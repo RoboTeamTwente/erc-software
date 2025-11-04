@@ -36,8 +36,8 @@ def generate_launch_description():
                 arguments=[
                     "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
                     "/model/vehicle/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist",
-                    "/model/vehicle/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry",
                     "/world/demo/model/vehicle/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model",
+                    "/world/demo/model/vehicle/link/gps/sensor/navsat/navsat@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat",
                 ],
                 parameters=[
                     {"qos_overrides./tf_static.publisher.durability": "transient_local"}
