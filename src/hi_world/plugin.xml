@@ -1,7 +1,0 @@
-<library path="robot">
-  <class type="hi_world::RobotDriver" base_class_type="webots_ros2_driver::PluginInterface">
-    <description>
-      This is a Webots ROS 2 plugin example
-    </description>
-  </class>
-</library>
