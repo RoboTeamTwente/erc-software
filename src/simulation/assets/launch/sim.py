@@ -1,6 +1,6 @@
 from launch import LaunchDescription
 from ament_index_python.packages import get_package_share_path
-from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
+from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument
 from launch.conditions import IfCondition
 from launch.actions import ExecuteProcess
@@ -9,9 +9,9 @@ from ros_gz_sim.actions import GzServer
 
 
 def generate_launch_description():
-    pkg_simulation_share = get_package_share_path("simulation")
+    assets_dir = get_package_share_path("simulation")
 
-    with open(pkg_simulation_share / "models" / "vehicle" / "model.sdf") as f:
+    with open(assets_dir / "models" / "vehicle" / "model.sdf") as f:
         robot_sdf = f.read()
 
     return LaunchDescription(
@@ -28,11 +28,7 @@ def generate_launch_description():
                 description="Open RViz2.",
             ),
             # simulator
-            GzServer(
-                world_sdf_file=(
-                    pkg_simulation_share / "worlds" / "vehicle.sdf"
-                ).as_posix()
-            ),
+            GzServer(world_sdf_file=(assets_dir / "worlds" / "vehicle.sdf").as_posix()),
             # ROS<->GZ bridge
             Node(
                 package="ros_gz_bridge",
