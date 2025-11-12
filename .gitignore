@@ -3,5 +3,8 @@
 /install/
 /log/
 
+# clangd
+.cache/clangd/
+
 # webots
 *.wbproj
