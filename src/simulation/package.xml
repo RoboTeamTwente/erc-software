@@ -10,14 +10,15 @@
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
   <buildtool_depend>ninja-build</buildtool_depend>
 
-  <depend>gz_sim_vendor</depend>
+  <depend>geometry_msgs</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>webots_ros2_driver</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
-
-    <gazebo_ros gazebo_model_path='${prefix}/..'/>
   </export>
 </package>

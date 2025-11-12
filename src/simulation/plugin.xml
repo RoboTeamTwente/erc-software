@@ -1,0 +1,3 @@
+<library path="robot_driver">
+  <class type="simulation::RobotDriver" base_class_type="webots_ros2_driver::PluginInterface"/>
+</library>

@@ -8,7 +8,8 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
-# ament_auto_add_library(robot SHARED DIRECTORY src)
+ament_auto_add_library(robot_driver SHARED DIRECTORY src)
+pluginlib_export_plugin_description_file(webots_ros2_driver plugin.xml)
 
 install(DIRECTORY assets/ DESTINATION share/${PROJECT_NAME})
 
