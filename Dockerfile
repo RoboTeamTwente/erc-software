@@ -15,7 +15,7 @@ RUN <<EOF
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/Cyberbotics.asc] https://cyberbotics.com/debian binary-amd64/" > /etc/apt/sources.list.d/Cyberbotics.list
 apt-get update
 EOF
-RUN apt-get upgrade -y webots python3-pylsp
+RUN apt-get upgrade -y clangd webots python3-pylsp
 
 COPY --parents src/*/package.xml .
 RUN rosdep install --from-path --ignore-src -y /ws/src
