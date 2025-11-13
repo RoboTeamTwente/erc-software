@@ -6,6 +6,9 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_executable(DisplayImage DisplayImage.cpp)
 add_executable(CalibrateCamera CalibrateCamera.cpp)
+add_executable(DetectAruco DetectAruco.cpp)
 
 target_link_libraries(DisplayImage ${OpenCV_LIBS})
 target_link_libraries(CalibrateCamera ${OpenCV_LIBS})
+target_link_libraries(DetectAruco ${OpenCV_LIBS})
+
