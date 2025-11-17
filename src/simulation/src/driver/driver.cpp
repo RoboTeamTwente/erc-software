@@ -38,6 +38,8 @@ void rtt_rover_driver::RobotDriver::init(
 
   for (size_t i = 0; i < steering.size(); i++) {
     steering_encoders[i] = wb_motor_get_position_sensor(steering[i]);
+    wb_position_sensor_enable(steering_encoders[i],
+                              32 /* FIXME actual value */);
   }
 
   for (auto &w : motors) {
