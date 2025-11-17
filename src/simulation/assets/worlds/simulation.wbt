@@ -25,14 +25,24 @@ Robot {
       translation 0 0.35 -0.2
       rotation 1 0 0 1.5708
       children [
-        HingeJoint {
+        Hinge2Joint {
           jointParameters HingeJointParameters {
             axis 0 0 -1
             anchor -0.575 0 0
           }
+          jointParameters2 JointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "left back wheel motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "left back steering motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
@@ -77,14 +87,24 @@ Robot {
             physics USE WHEEL_PHYSICS
           }
         }
-        HingeJoint {
+        Hinge2Joint {
           jointParameters HingeJointParameters {
             axis 0 0 -1
             anchor 0.575 0 0
           }
+          jointParameters2 JointParameters {
+            axis 0 1 0
+          }
           device [
             RotationalMotor {
               name "left front wheel motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "left front steering motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
@@ -105,14 +125,24 @@ Robot {
       translation 0 -0.35 -0.2
       rotation 1 0 0 -1.57
       children [
-        HingeJoint {
+        Hinge2Joint {
           jointParameters HingeJointParameters {
             axis 0 0 1
             anchor -0.575 0 0
           }
+          jointParameters2 JointParameters {
+            axis 0 -1 0
+          }
           device [
             RotationalMotor {
               name "right back wheel motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "right back steering motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
@@ -147,14 +177,24 @@ Robot {
             physics USE WHEEL_PHYSICS
           }
         }
-        HingeJoint {
+        Hinge2Joint {
           jointParameters HingeJointParameters {
             axis 0 0 1
             anchor 0.575 0 0
           }
+          jointParameters2 JointParameters {
+            axis 0 -1 0
+          }
           device [
             RotationalMotor {
               name "right front wheel motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "right front steering motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
