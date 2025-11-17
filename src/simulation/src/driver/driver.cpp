@@ -1,5 +1,13 @@
-#include "rtt_rover_driver/driver.hpp"
+extern "C" {
 #include "rtt_rover_control/control.h"
+}
+
+#include "rtt_rover_driver/driver.hpp"
+#include <cmath>
+#include <cstddef>
+#include <rclcpp/logger.hpp>
+#include <webots/motor.h>
+#include <webots/position_sensor.h>
 
 void rtt_rover_driver::RobotDriver::init(
     webots_ros2_driver::WebotsNode *node,
@@ -7,63 +15,75 @@ void rtt_rover_driver::RobotDriver::init(
 
   node_ = node;
 
-  RCLCPP_INFO(rclcpp::get_logger("robot_driver"), "hi world");
+  RCLCPP_INFO(node_->get_logger(), "hi world");
+
+  control_initialize();
 
   gps_ = wb_robot_get_device("gps");
   cam_ = wb_robot_get_device("camera");
 
   wb_camera_enable(cam_, 15 /* FPS */);
 
-  wheel_bl_ = wb_robot_get_device("left back wheel motor");
-  wheel_ml_ = wb_robot_get_device("left middle wheel motor");
-  wheel_fl_ = wb_robot_get_device("left front wheel motor");
-  wheel_br_ = wb_robot_get_device("right back wheel motor");
-  wheel_mr_ = wb_robot_get_device("right middle wheel motor");
-  wheel_fr_ = wb_robot_get_device("right front wheel motor");
+  motors[0] = wb_robot_get_device("left front wheel motor");
+  motors[1] = wb_robot_get_device("left middle wheel motor");
+  motors[2] = wb_robot_get_device("left back wheel motor");
+  motors[3] = wb_robot_get_device("right front wheel motor");
+  motors[4] = wb_robot_get_device("right middle wheel motor");
+  motors[5] = wb_robot_get_device("right back wheel motor");
 
-  wb_motor_set_position(wheel_bl_, INFINITY);
-  wb_motor_set_position(wheel_ml_, INFINITY);
-  wb_motor_set_position(wheel_fl_, INFINITY);
-  wb_motor_set_position(wheel_br_, INFINITY);
-  wb_motor_set_position(wheel_mr_, INFINITY);
-  wb_motor_set_position(wheel_fr_, INFINITY);
+  steering[0] = wb_robot_get_device("left front steering motor");
+  steering[1] = wb_robot_get_device("left back steering motor");
+  steering[2] = wb_robot_get_device("right front steering motor");
+  steering[3] = wb_robot_get_device("right back steering motor");
 
-  wb_motor_set_velocity(wheel_bl_, 0);
-  wb_motor_set_velocity(wheel_ml_, 0);
-  wb_motor_set_velocity(wheel_fl_, 0);
-  wb_motor_set_velocity(wheel_br_, 0);
-  wb_motor_set_velocity(wheel_mr_, 0);
-  wb_motor_set_velocity(wheel_fr_, 0);
+  for (size_t i = 0; i < steering.size(); i++) {
+    steering_encoders[i] = wb_motor_get_position_sensor(steering[i]);
+  }
+
+  for (auto &w : motors) {
+    wb_motor_set_position(w, INFINITY);
+    wb_motor_set_velocity(w, 0);
+  }
 
   cmd_vel_sub_ = node_->create_subscription<geometry_msgs::msg::Twist>(
       "/cmd_vel", rclcpp::SensorDataQoS().reliable(),
-      [this](std::shared_ptr<geometry_msgs::msg::Twist const> msg) {
-        RCLCPP_INFO(node_->get_logger(), "got twist %lf %lf", msg->linear.x,
-                    msg->angular.z);
-        cmd_vel_.linear = msg->linear;
-        cmd_vel_.angular = msg->angular;
-      });
+      std::bind(&rtt_rover_driver::RobotDriver::process_command, this,
+                std::placeholders::_1));
 
   RCLCPP_INFO(node_->get_logger(), "sub created %p",
               (void *)cmd_vel_sub_.get());
 }
+
+void rtt_rover_driver::RobotDriver::process_command(
+    std::shared_ptr<geometry_msgs::msg::Twist const> msg) {
+  RCLCPP_INFO(node_->get_logger(), "got twist %lf %lf", msg->linear.x,
+              msg->angular.z);
+  rtU.alpha = msg->angular.z;
+  rtU.goal = msg->linear.x;
+  rtU.R = rtU.goal / rtU.alpha;
+  rtU.pos = 0;
+}
+
 void rtt_rover_driver::RobotDriver::step() {
-  auto constexpr HALF_WHEEL_SEPARATION = 3;
-  auto constexpr WHEEL_RADIUS = 3;
+  for (size_t i = 0; i < motors.size(); i++) {
+    rtU.actspeed[i] = wb_motor_get_velocity(motors[i]);
+  }
 
-  auto fwd = cmd_vel_.linear.x;
-  auto rot = cmd_vel_.angular.z;
+  for (size_t i = 0; i < steering.size(); i++) {
+    rtU.actspeed[i] = wb_position_sensor_get_value(steering_encoders[i]);
+  }
 
-  auto lvel = (fwd - rot * HALF_WHEEL_SEPARATION) / WHEEL_RADIUS;
-  auto rvel = (fwd + rot * HALF_WHEEL_SEPARATION) / WHEEL_RADIUS;
+  control_step();
 
-  wb_motor_set_velocity(wheel_bl_, lvel);
-  wb_motor_set_velocity(wheel_ml_, lvel);
-  wb_motor_set_velocity(wheel_fl_, lvel);
-  wb_motor_set_velocity(wheel_br_, rvel);
-  wb_motor_set_velocity(wheel_mr_, rvel);
-  wb_motor_set_velocity(wheel_fr_, rvel);
+  for (size_t i = 0; i < motors.size(); i++) {
+    // controlb is on scale 0V-24V
+    // desspeed is for debugging
+    wb_motor_set_velocity(motors[i], rtY.controlb[i]);
+  }
 
-  // RCLCPP_INFO(node_->get_logger(), "step %lf %lf", cmd_vel_.linear.x,
-  //             cmd_vel_.angular.z);
+  for (size_t i = 0; i < steering.size(); i++) {
+    // desang is for debugging as well,
+    // but I don't wanna parse PWM signals
+    wb_motor_set_position(steering[i], rtY.desang[i]);
+  }
 }
