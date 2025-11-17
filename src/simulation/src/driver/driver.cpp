@@ -90,12 +90,14 @@ void rtt_rover_driver::RobotDriver::step() {
   for (size_t i = 0; i < motors.size(); i++) {
     // controlb is on scale 0V-24V
     // desspeed is for debugging
+    assert(!std::isnan(rtY.controlb[i]));
     wb_motor_set_velocity(motors[i], rtY.controlb[i]);
   }
 
   for (size_t i = 0; i < steering.size(); i++) {
     // desang is for debugging as well,
     // but I don't wanna parse PWM signals
+    assert(!std::isnan(rtY.desang[i]));
     wb_motor_set_position(steering[i], rtY.desang[i]);
   }
 }
