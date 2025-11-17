@@ -22,16 +22,18 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
   void step() override;
 
 private:
+  void
+  process_command(std::shared_ptr<geometry_msgs::msg::Twist const> message);
+
   webots_ros2_driver::WebotsNode *node_;
   WbDeviceTag gps_, cam_;
-  WbDeviceTag wheel_bl_, wheel_br_;
-  WbDeviceTag wheel_ml_, wheel_mr_;
-  WbDeviceTag wheel_fl_, wheel_fr_;
+  std::array<WbDeviceTag, 6> motors;
+  std::array<WbDeviceTag, 4> steering, steering_encoders;
   std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::Twist>> cmd_vel_sub_;
   geometry_msgs::msg::Twist cmd_vel_;
 };
 
-} // namespace hi_world
+} // namespace rtt_rover_driver
 
 #include <pluginlib/class_list_macros.hpp>
 PLUGINLIB_EXPORT_CLASS(rtt_rover_driver::RobotDriver,
