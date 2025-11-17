@@ -15,7 +15,7 @@ void rtt_rover_driver::RobotDriver::init(
 
   node_ = node;
 
-  RCLCPP_INFO(node_->get_logger(), "hi world");
+  RCLCPP_INFO(node_->get_logger(), "starting initialization");
 
   control_initialize();
 
@@ -52,14 +52,14 @@ void rtt_rover_driver::RobotDriver::init(
       std::bind(&rtt_rover_driver::RobotDriver::process_command, this,
                 std::placeholders::_1));
 
-  RCLCPP_INFO(node_->get_logger(), "sub created %p",
-              (void *)cmd_vel_sub_.get());
+  RCLCPP_INFO(node_->get_logger(), "initialization done");
 }
 
 void rtt_rover_driver::RobotDriver::process_command(
     std::shared_ptr<geometry_msgs::msg::Twist const> msg) {
   RCLCPP_INFO(node_->get_logger(), "got twist %lf %lf", msg->linear.x,
               msg->angular.z);
+
   rtU.alpha = msg->angular.z;
   rtU.goal = msg->linear.x;
   rtU.R = rtU.goal / rtU.alpha;
@@ -76,6 +76,16 @@ void rtt_rover_driver::RobotDriver::step() {
   }
 
   control_step();
+
+  RCLCPP_INFO(node_->get_logger(),
+              "\n"
+              "control inputs: R=%lf alpha=%lf goal=%lf\n"
+              "control outputs: motors=[%lf %lf %lf %lf %lf %lf]\n"
+              "control outputs: steering=[%lf %lf %lf %lf]",
+              rtU.R, rtU.alpha, rtU.goal, //
+              rtY.controlb[0], rtY.controlb[1], rtY.controlb[2],
+              rtY.controlb[3], rtY.controlb[4], rtY.controlb[5], //
+              rtY.desang[0], rtY.desang[1], rtY.desang[2], rtY.desang[3]);
 
   for (size_t i = 0; i < motors.size(); i++) {
     // controlb is on scale 0V-24V
