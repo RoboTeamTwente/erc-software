@@ -27,8 +27,8 @@ private:
 
   webots_ros2_driver::WebotsNode *node_;
   WbDeviceTag gps_, cam_;
-  std::array<WbDeviceTag, 6> motors;
-  std::array<WbDeviceTag, 4> steering, steering_encoders;
+  std::array<WbDeviceTag, 6> motors_;
+  std::array<WbDeviceTag, 4> steering_, steering_encoders_;
   std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::Twist>> cmd_vel_sub_;
   geometry_msgs::msg::Twist cmd_vel_;
 };
