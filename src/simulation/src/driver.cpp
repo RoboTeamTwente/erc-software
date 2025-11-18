@@ -123,12 +123,17 @@ void rtt_rover_driver::RobotDriver::step() {
               "\n"
               "control inputs: R=%lf alpha=%lf dist=%lf\n"
               "control outputs: motors=[%lf %lf %lf %lf %lf %lf]\n"
+              "speed: [%lf %lf %lf %lf %lf %lf] [%lf %lf %lf %lf %lf %lf]\n"
               "control outputs: steering=[%lf %lf %lf %lf]\n"
               "GPS: %lf %lf %lf "
               "IMU: %lf %lf %lf",
               rtU.R, rtU.alpha, rtU.dist2goal, //
               rtY.controlb[0], rtY.controlb[1], rtY.controlb[2],
-              rtY.controlb[3], rtY.controlb[4], rtY.controlb[5],          //
+              rtY.controlb[3], rtY.controlb[4], rtY.controlb[5], //
+              rtU.actspeed[0], rtU.actspeed[1], rtU.actspeed[2],
+              rtU.actspeed[3], rtU.actspeed[4], rtU.actspeed[5], //
+              rtY.desspeed[0], rtY.desspeed[1], rtY.desspeed[2],
+              rtY.desspeed[3], rtY.desspeed[4], rtY.desspeed[5],          //
               rtY.desang[0], rtY.desang[1], rtY.desang[2], rtY.desang[3], //
               position[0], position[1], position[2],                      //
               roll, pitch, yaw);
