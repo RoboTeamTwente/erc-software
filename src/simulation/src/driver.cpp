@@ -24,25 +24,25 @@ void rtt_rover_driver::RobotDriver::init(
 
   wb_camera_enable(cam_, 15 /* FPS */);
 
-  motors[0] = wb_robot_get_device("left front wheel motor");
-  motors[1] = wb_robot_get_device("left middle wheel motor");
-  motors[2] = wb_robot_get_device("left back wheel motor");
-  motors[3] = wb_robot_get_device("right front wheel motor");
-  motors[4] = wb_robot_get_device("right middle wheel motor");
-  motors[5] = wb_robot_get_device("right back wheel motor");
+  motors_[0] = wb_robot_get_device("left front wheel motor");
+  motors_[1] = wb_robot_get_device("left middle wheel motor");
+  motors_[2] = wb_robot_get_device("left back wheel motor");
+  motors_[3] = wb_robot_get_device("right front wheel motor");
+  motors_[4] = wb_robot_get_device("right middle wheel motor");
+  motors_[5] = wb_robot_get_device("right back wheel motor");
 
-  steering[0] = wb_robot_get_device("left front steering motor");
-  steering[1] = wb_robot_get_device("left back steering motor");
-  steering[2] = wb_robot_get_device("right front steering motor");
-  steering[3] = wb_robot_get_device("right back steering motor");
+  steering_[0] = wb_robot_get_device("left front steering motor");
+  steering_[1] = wb_robot_get_device("left back steering motor");
+  steering_[2] = wb_robot_get_device("right front steering motor");
+  steering_[3] = wb_robot_get_device("right back steering motor");
 
-  for (size_t i = 0; i < steering.size(); i++) {
-    steering_encoders[i] = wb_motor_get_position_sensor(steering[i]);
-    wb_position_sensor_enable(steering_encoders[i],
+  for (size_t i = 0; i < steering_.size(); i++) {
+    steering_encoders_[i] = wb_motor_get_position_sensor(steering_[i]);
+    wb_position_sensor_enable(steering_encoders_[i],
                               32 /* FIXME actual value */);
   }
 
-  for (auto &w : motors) {
+  for (auto &w : motors_) {
     wb_motor_set_position(w, INFINITY);
     wb_motor_set_velocity(w, 0);
   }
@@ -66,12 +66,12 @@ void rtt_rover_driver::RobotDriver::process_command(
 }
 
 void rtt_rover_driver::RobotDriver::step() {
-  for (size_t i = 0; i < motors.size(); i++) {
-    rtU.actspeed[i] = wb_motor_get_velocity(motors[i]);
+  for (size_t i = 0; i < motors_.size(); i++) {
+    rtU.actspeed[i] = wb_motor_get_velocity(motors_[i]);
   }
 
-  for (size_t i = 0; i < steering.size(); i++) {
-    rtU.actspeed[i] = wb_position_sensor_get_value(steering_encoders[i]);
+  for (size_t i = 0; i < steering_.size(); i++) {
+    rtU.actspeed[i] = wb_position_sensor_get_value(steering_encoders_[i]);
   }
 
   control_step();
@@ -86,17 +86,17 @@ void rtt_rover_driver::RobotDriver::step() {
               rtY.controlb[3], rtY.controlb[4], rtY.controlb[5], //
               rtY.desang[0], rtY.desang[1], rtY.desang[2], rtY.desang[3]);
 
-  for (size_t i = 0; i < motors.size(); i++) {
+  for (size_t i = 0; i < motors_.size(); i++) {
     // controlb is on scale 0V-24V
     // desspeed is for debugging
     assert(!std::isnan(rtY.controlb[i]));
-    wb_motor_set_velocity(motors[i], rtY.controlb[i]);
+    wb_motor_set_velocity(motors_[i], rtY.controlb[i]);
   }
 
-  for (size_t i = 0; i < steering.size(); i++) {
+  for (size_t i = 0; i < steering_.size(); i++) {
     // desang is for debugging as well,
     // but I don't wanna parse PWM signals
     assert(!std::isnan(rtY.desang[i]));
-    wb_motor_set_position(steering[i], rtY.desang[i] * M_PI / 180);
+    wb_motor_set_position(steering_[i], rtY.desang[i] * M_PI / 180);
   }
 }
