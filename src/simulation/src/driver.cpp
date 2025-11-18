@@ -79,6 +79,10 @@ void rtt_rover_driver::RobotDriver::init(
 }
 
 void rtt_rover_driver::RobotDriver::step() {
+  // wait for the first sample
+  if (wb_robot_get_time() * 1000 < sample_rate_)
+    return;
+
   for (size_t i = 0; i < motors_.size(); i++) {
     rtU.actspeed[i] = wb_motor_get_velocity(motors_[i]);
   }
