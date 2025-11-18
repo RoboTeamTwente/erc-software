@@ -62,7 +62,7 @@ void rtt_rover_driver::RobotDriver::process_command(
 
   rtU.alpha = msg->angular.z;
   rtU.goal = msg->linear.x;
-  rtU.R = rtU.goal / rtU.alpha;
+  rtU.R = std::abs(rtU.goal / rtU.alpha);
   rtU.pos = 0;
 }
 
