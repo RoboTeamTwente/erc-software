@@ -1,15 +1,6 @@
-#include <cmath>
-#include <geometry_msgs/msg/twist.hpp>
-#include <memory>
-#include <rclcpp/logger.hpp>
-#include <rclcpp/logging.hpp>
-#include <rclcpp/qos.hpp>
+#include <geometry_msgs/msg/pose.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
 #include <rclcpp/subscription.hpp>
-#include <webots/camera.h>
-#include <webots/device.h>
-#include <webots/gps.h>
-#include <webots/motor.h>
-#include <webots/robot.h>
 #include <webots_ros2_driver/PluginInterface.hpp>
 #include <webots_ros2_driver/WebotsNode.hpp>
 
@@ -22,15 +13,15 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
   void step() override;
 
 private:
-  void
-  process_command(std::shared_ptr<geometry_msgs::msg::Twist const> message);
-
   webots_ros2_driver::WebotsNode *node_;
-  WbDeviceTag gps_, cam_;
+
+  WbDeviceTag gps_, cam_,imu_;
   std::array<WbDeviceTag, 6> motors_;
   std::array<WbDeviceTag, 4> steering_, steering_encoders_;
-  std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::Twist>> cmd_vel_sub_;
-  geometry_msgs::msg::Twist cmd_vel_;
+
+  std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::PoseStamped>>
+      goal_pose_sub_;
+  geometry_msgs::msg::Pose goal_pose_;
 };
 
 } // namespace rtt_rover_driver
