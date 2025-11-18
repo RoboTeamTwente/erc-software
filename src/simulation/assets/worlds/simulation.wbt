@@ -27,25 +27,25 @@ Robot {
       children [
         Hinge2Joint {
           jointParameters HingeJointParameters {
-            axis 0 0 -1
+            axis 0 1 0
             anchor -0.575 0 0
           }
           jointParameters2 JointParameters {
-            axis 0 1 0
+            axis 0 0 -1
           }
           device [
-            RotationalMotor {
-              name "left back wheel motor"
-              maxVelocity 1000000
-              maxTorque 1000000
-            }
-          ]
-          device2 [
             PositionSensor {
               name "left back steering sensor"
             }
             RotationalMotor {
               name "left back steering motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "left back wheel motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
@@ -92,25 +92,25 @@ Robot {
         }
         Hinge2Joint {
           jointParameters HingeJointParameters {
-            axis 0 0 -1
             anchor 0.575 0 0
-          }
-          jointParameters2 JointParameters {
             axis 0 1 0
           }
+          jointParameters2 JointParameters {
+            axis 0 0 -1
+          }
           device [
-            RotationalMotor {
-              name "left front wheel motor"
-              maxVelocity 1000000
-              maxTorque 1000000
-            }
-          ]
-          device2 [
             PositionSensor {
               name "left front steering sensor"
             }
             RotationalMotor {
               name "left front steering motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "left front wheel motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
@@ -133,25 +133,25 @@ Robot {
       children [
         Hinge2Joint {
           jointParameters HingeJointParameters {
-            axis 0 0 1
             anchor -0.575 0 0
-          }
-          jointParameters2 JointParameters {
             axis 0 -1 0
           }
+          jointParameters2 JointParameters {
+            axis 0 0 1
+          }
           device [
-            RotationalMotor {
-              name "right back wheel motor"
-              maxVelocity 1000000
-              maxTorque 1000000
-            }
-          ]
-          device2 [
             PositionSensor {
               name "right back steering sensor"
             }
             RotationalMotor {
               name "right back steering motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "right back wheel motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
@@ -188,25 +188,25 @@ Robot {
         }
         Hinge2Joint {
           jointParameters HingeJointParameters {
-            axis 0 0 1
+            axis 0 -1 0
             anchor 0.575 0 0
           }
           jointParameters2 JointParameters {
-            axis 0 -1 0
+            axis 0 0 1
           }
           device [
-            RotationalMotor {
-              name "right front wheel motor"
-              maxVelocity 1000000
-              maxTorque 1000000
-            }
-          ]
-          device2 [
             PositionSensor {
               name "right front steering sensor"
             }
             RotationalMotor {
               name "right front steering motor"
+              maxVelocity 1000000
+              maxTorque 1000000
+            }
+          ]
+          device2 [
+            RotationalMotor {
+              name "right front wheel motor"
               maxVelocity 1000000
               maxTorque 1000000
             }
