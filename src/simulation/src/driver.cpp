@@ -1,8 +1,8 @@
 extern "C" {
-#include "rtt_rover_control/control.h"
+#include <control.h>
 }
 
-#include "rtt_rover_driver/driver.hpp"
+#include "driver.hpp"
 #include <cmath>
 #include <cstddef>
 #include <rclcpp/logger.hpp>
@@ -61,9 +61,8 @@ void rtt_rover_driver::RobotDriver::process_command(
               msg->angular.z);
 
   rtU.alpha = msg->angular.z;
-  rtU.goal = msg->linear.x;
-  rtU.R = std::abs(rtU.goal / rtU.alpha);
-  rtU.pos = 0;
+  rtU.dist2goal = msg->linear.x;
+  rtU.R = std::abs(rtU.dist2goal / rtU.alpha);
 }
 
 void rtt_rover_driver::RobotDriver::step() {
@@ -79,10 +78,10 @@ void rtt_rover_driver::RobotDriver::step() {
 
   RCLCPP_INFO(node_->get_logger(),
               "\n"
-              "control inputs: R=%lf alpha=%lf goal=%lf\n"
+              "control inputs: R=%lf alpha=%lf dist=%lf\n"
               "control outputs: motors=[%lf %lf %lf %lf %lf %lf]\n"
               "control outputs: steering=[%lf %lf %lf %lf]",
-              rtU.R, rtU.alpha, rtU.goal, //
+              rtU.R, rtU.alpha, rtU.dist2goal, //
               rtY.controlb[0], rtY.controlb[1], rtY.controlb[2],
               rtY.controlb[3], rtY.controlb[4], rtY.controlb[5], //
               rtY.desang[0], rtY.desang[1], rtY.desang[2], rtY.desang[3]);
