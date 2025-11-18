@@ -88,7 +88,7 @@ void rtt_rover_driver::RobotDriver::step() {
   }
 
   for (size_t i = 0; i < steering_.size(); i++) {
-    rtU.actspeed[i] = wb_position_sensor_get_value(steering_encoders_[i]);
+    rtU.actang[i] = wb_position_sensor_get_value(steering_encoders_[i]);
   }
 
   auto position_raw = wb_gps_get_values(gps_);
