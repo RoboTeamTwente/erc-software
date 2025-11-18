@@ -98,6 +98,6 @@ void rtt_rover_driver::RobotDriver::step() {
     // desang is for debugging as well,
     // but I don't wanna parse PWM signals
     assert(!std::isnan(rtY.desang[i]));
-    wb_motor_set_position(steering[i], rtY.desang[i]);
+    wb_motor_set_position(steering[i], rtY.desang[i] * M_PI / 180);
   }
 }
