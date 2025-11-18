@@ -19,10 +19,13 @@ void rtt_rover_driver::RobotDriver::init(
 
   control_initialize();
 
+  // same as the world's sample rate
+  auto constexpr SAMPLE_RATE = 32;
+
   gps_ = wb_robot_get_device("gps");
   cam_ = wb_robot_get_device("camera");
 
-  wb_camera_enable(cam_, 15 /* FPS */);
+  wb_camera_enable(cam_, SAMPLE_RATE);
 
   motors_[0] = wb_robot_get_device("left front wheel motor");
   motors_[1] = wb_robot_get_device("left middle wheel motor");
@@ -38,8 +41,7 @@ void rtt_rover_driver::RobotDriver::init(
 
   for (size_t i = 0; i < steering_.size(); i++) {
     steering_encoders_[i] = wb_motor_get_position_sensor(steering_[i]);
-    wb_position_sensor_enable(steering_encoders_[i],
-                              32 /* FIXME actual value */);
+    wb_position_sensor_enable(steering_encoders_[i], SAMPLE_RATE);
   }
 
   for (auto &w : motors_) {
