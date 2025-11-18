@@ -14,8 +14,9 @@ class RobotDriver : public webots_ros2_driver::PluginInterface {
 
 private:
   webots_ros2_driver::WebotsNode *node_;
+  double sample_rate_;
 
-  WbDeviceTag gps_, cam_,imu_;
+  WbDeviceTag gps_, cam_, imu_;
   std::array<WbDeviceTag, 6> motors_;
   std::array<WbDeviceTag, 4> steering_, steering_encoders_;
 
