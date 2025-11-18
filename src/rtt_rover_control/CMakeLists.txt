@@ -14,8 +14,6 @@ target_include_directories(rtt_rover_control PRIVATE
   include_shim
 )
 
-install(DIRECTORY assets/ DESTINATION share/${PROJECT_NAME})
-
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
