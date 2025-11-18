@@ -30,16 +30,16 @@ void rtt_rover_driver::RobotDriver::init(
 
   control_initialize();
 
-  // same as the world's sample rate
-  auto constexpr SAMPLE_RATE = 32;
+  sample_rate_ = wb_robot_get_basic_time_step();
+  RCLCPP_INFO(node_->get_logger(), "sample rate %lf", sample_rate_);
 
   gps_ = wb_robot_get_device("gps");
   cam_ = wb_robot_get_device("camera");
   imu_ = wb_robot_get_device("inertial unit");
 
-  wb_camera_enable(cam_, SAMPLE_RATE);
-  wb_gps_enable(gps_, SAMPLE_RATE);
-  wb_inertial_unit_enable(imu_, SAMPLE_RATE);
+  wb_camera_enable(cam_, sample_rate_);
+  wb_gps_enable(gps_, sample_rate_);
+  wb_inertial_unit_enable(imu_, sample_rate_);
 
   assert(wb_gps_get_coordinate_system(gps_) == WB_GPS_LOCAL_COORDINATE);
 
@@ -57,7 +57,7 @@ void rtt_rover_driver::RobotDriver::init(
 
   for (size_t i = 0; i < steering_.size(); i++) {
     steering_encoders_[i] = wb_motor_get_position_sensor(steering_[i]);
-    wb_position_sensor_enable(steering_encoders_[i], SAMPLE_RATE);
+    wb_position_sensor_enable(steering_encoders_[i], sample_rate_);
   }
 
   for (auto &w : motors_) {
