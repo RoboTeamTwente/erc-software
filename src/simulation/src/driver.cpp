@@ -61,7 +61,7 @@ void rtt_rover_driver::RobotDriver::init(
   }
 
   for (auto &w : motors_) {
-    wb_motor_set_position(w, INFINITY);
+    wb_motor_set_position(w, std::numeric_limits<double>::infinity());
     wb_motor_set_velocity(w, 0);
   }
 
