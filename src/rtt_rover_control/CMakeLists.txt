@@ -9,6 +9,7 @@ find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
 ament_auto_add_library(rtt_rover_control SHARED DIRECTORY src)
+target_include_directories(rtt_rover_control PRIVATE erc-control-steering/control_ert_rtw)
 
 install(DIRECTORY assets/ DESTINATION share/${PROJECT_NAME})
 
