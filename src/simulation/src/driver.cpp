@@ -19,6 +19,8 @@ extern "C" {
 #include <control.h>
 }
 
+constexpr double wheel_radius = 0.1;
+
 void rtt_rover_driver::RobotDriver::init(
     webots_ros2_driver::WebotsNode *node,
     std::unordered_map<std::string, std::string> &) {
@@ -86,16 +88,19 @@ void rtt_rover_driver::RobotDriver::step() {
 
   for (size_t i = 0; i < motors_.size(); i++) {
     auto pos = wb_position_sensor_get_value(motor_encoders_[i]);
-    auto speed_rad_s = pos - motor_positions_[i];
+    auto speed_rad_tick = pos - motor_positions_[i];
     motor_positions_[i] = pos;
-    if (speed_rad_s < 0) {
-      speed_rad_s += M_PI + M_PI;
+    if (speed_rad_tick < 0) {
+      speed_rad_tick += M_PI + M_PI;
     }
-    rtU.actspeed[i] = speed_rad_s / (M_PI + M_PI);
+    auto speed_rad_ms = speed_rad_tick / wb_robot_get_basic_time_step();
+    auto speed_m_s = speed_rad_ms * 1000 / (M_PI * 2 * wheel_radius);
+    rtU.actspeed[i] = speed_m_s;
   }
 
   for (size_t i = 0; i < steering_.size(); i++) {
-    rtU.actang[i] = wb_position_sensor_get_value(steering_encoders_[i]) * 180 / M_PI;
+    rtU.actang[i] =
+        wb_position_sensor_get_value(steering_encoders_[i]) * 180 / M_PI;
   }
 
   auto position_raw = wb_gps_get_values(gps_);
@@ -151,7 +156,8 @@ void rtt_rover_driver::RobotDriver::step() {
     // controlb is on scale 0V-24V
     // desspeed is for debugging
     if (!std::isnan(rtY.controlb[i])) {
-      wb_motor_set_velocity(motors_[i], rtY.controlb[i] * (M_PI + M_PI));
+      wb_motor_set_velocity(motors_[i],
+                            rtY.controlb[i] * M_PI * 2 * wheel_radius);
     }
   }
 
