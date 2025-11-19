@@ -88,22 +88,20 @@ void rtt_rover_driver::RobotDriver::step() {
     return;
 
   for (size_t i = 0; i < motors_.size(); i++) {
-    motor_positions_[i][motor_position_ixs_[i]] =
-        wb_position_sensor_get_value(motor_encoders_[i]);
+    auto &ix = motor_position_ixs_[i];
+    auto const ix1 = (ix + 1) % motor_positions_[i].size();
+    auto &pos = motor_positions_[i];
 
-    auto speed_rad_tick = motor_positions_[i][motor_position_ixs_[i]] -
-                          motor_positions_[i][(motor_position_ixs_[i] + 1) %
-                                              motor_positions_[i].size()];
+    pos[ix] = wb_position_sensor_get_value(motor_encoders_[i]);
 
-    auto speed_rad_ms = speed_rad_tick / wb_robot_get_basic_time_step() /
-                        motor_positions_[i].size();
-
+    auto speed_rad_tick_window = pos[ix] - pos[ix1];
+    auto speed_rad_tick = speed_rad_tick_window / motor_positions_[i].size();
+    auto speed_rad_ms = speed_rad_tick / tick_ms_;
     auto speed_m_ms = speed_rad_ms / wheel_radius;
     auto speed_m_s = speed_m_ms * 1000;
     rtU.actspeed[i] = speed_m_s;
 
-    motor_position_ixs_[i] =
-        (motor_position_ixs_[i] + 1) + motor_positions_[i].size();
+    ix = ix1;
   }
 
   for (size_t i = 0; i < steering_.size(); i++) {
