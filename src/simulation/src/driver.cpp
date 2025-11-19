@@ -31,7 +31,8 @@ void rtt_rover_driver::RobotDriver::init(
 
   control_initialize();
 
-  sample_rate_ = wb_robot_get_basic_time_step();
+  tick_ms_ = wb_robot_get_basic_time_step();
+  sample_rate_ = tick_ms_;
   RCLCPP_INFO(node_->get_logger(), "sample rate %lf", sample_rate_);
 
   gps_ = wb_robot_get_device("gps");
