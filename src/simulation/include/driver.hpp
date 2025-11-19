@@ -17,7 +17,7 @@ private:
   double sample_rate_;
 
   WbDeviceTag gps_, cam_, imu_;
-  std::array<WbDeviceTag, 6> motors_;
+  std::array<WbDeviceTag, 6> motors_, motor_encoders_;
   std::array<WbDeviceTag, 4> steering_, steering_encoders_;
 
   std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::PoseStamped>>

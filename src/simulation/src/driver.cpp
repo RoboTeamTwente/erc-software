@@ -58,9 +58,11 @@ void rtt_rover_driver::RobotDriver::init(
     wb_position_sensor_enable(steering_encoders_[i], sample_rate_);
   }
 
-  for (auto &w : motors_) {
-    wb_motor_set_position(w, std::numeric_limits<double>::infinity());
-    wb_motor_set_velocity(w, 0);
+  for (size_t i = 0; i < motors_.size(); i++) {
+    wb_motor_set_position(motors_[i], std::numeric_limits<double>::infinity());
+    wb_motor_set_velocity(motors_[i], 0);
+    motor_encoders_[i] = wb_motor_get_position_sensor(motors_[i]);
+    wb_position_sensor_enable(motor_encoders_[i], sample_rate_);
   }
 
   goal_pose_sub_ = node_->create_subscription<geometry_msgs::msg::PoseStamped>(
