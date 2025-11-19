@@ -97,7 +97,8 @@ void rtt_rover_driver::RobotDriver::step() {
     auto speed_rad_ms = speed_rad_tick / wb_robot_get_basic_time_step() /
                         motor_positions_[i].size();
 
-    auto speed_m_s = speed_rad_ms * 1000 / (M_PI * 2 * wheel_radius);
+    auto speed_m_ms = speed_rad_ms / wheel_radius;
+    auto speed_m_s = speed_m_ms * 1000;
     rtU.actspeed[i] = speed_m_s;
 
     motor_position_ixs_[i] =
@@ -162,8 +163,7 @@ void rtt_rover_driver::RobotDriver::step() {
     // controlb is on scale 0V-24V
     // desspeed is for debugging
     if (!std::isnan(rtY.controlb[i])) {
-      wb_motor_set_velocity(motors_[i],
-                            rtY.controlb[i] * M_PI * 2 * wheel_radius);
+      wb_motor_set_velocity(motors_[i], rtY.controlb[i] / wheel_radius);
     }
   }
 
