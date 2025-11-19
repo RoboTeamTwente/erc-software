@@ -135,7 +135,7 @@ void rtt_rover_driver::RobotDriver::step() {
 
   rtU.alpha = yaw * 180 / M_PI;
   rtU.dist2goal = position.distance(goal_position);
-  rtU.R = 1; // std::abs(rtU.dist2goal / rtU.alpha * M_PI / 180);
+  rtU.R = 2; // std::abs(rtU.dist2goal / rtU.alpha * M_PI / 180);
 
   control_step();
 
