@@ -45,6 +45,9 @@ Robot {
             }
           ]
           device2 [
+            PositionSensor {
+              name "left back wheel sensor"
+            }
             RotationalMotor {
               name "left back wheel motor"
               maxVelocity 1000000
@@ -76,6 +79,9 @@ Robot {
             axis 0 0 -1
           }
           device [
+            PositionSensor {
+              name "left middle wheel sensor"
+            }
             RotationalMotor {
               name "left middle wheel motor"
               maxVelocity 1000000
@@ -110,6 +116,9 @@ Robot {
             }
           ]
           device2 [
+            PositionSensor {
+              name "left front wheel sensor"
+            }
             RotationalMotor {
               name "left front wheel motor"
               maxVelocity 1000000
@@ -151,6 +160,9 @@ Robot {
             }
           ]
           device2 [
+            PositionSensor {
+              name "right back wheel sensor"
+            }
             RotationalMotor {
               name "right back wheel motor"
               maxVelocity 1000000
@@ -172,6 +184,9 @@ Robot {
             axis 0 0 1
           }
           device [
+            PositionSensor {
+              name "right middle wheel sensor"
+            }
             RotationalMotor {
               name "right middle wheel motor"
               maxVelocity 1000000
@@ -206,6 +221,9 @@ Robot {
             }
           ]
           device2 [
+            PositionSensor {
+              name "right front wheel sensor"
+            }
             RotationalMotor {
               name "right front wheel motor"
               maxVelocity 1000000
