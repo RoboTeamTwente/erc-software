@@ -18,7 +18,8 @@ private:
 
   WbDeviceTag gps_, cam_, imu_;
   std::array<WbDeviceTag, 6> motors_, motor_encoders_;
-  std::array<double, 6> motor_positions_;
+  std::array<std::array<double, 32>, 6> motor_positions_;
+  std::array<size_t, 6> motor_position_ixs_;
   std::array<WbDeviceTag, 4> steering_, steering_encoders_;
 
   std::shared_ptr<rclcpp::Subscription<geometry_msgs::msg::PoseStamped>>
