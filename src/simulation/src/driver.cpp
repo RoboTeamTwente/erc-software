@@ -1,5 +1,6 @@
 #include "driver.hpp"
 
+#include <cmath>
 #include <rclcpp/logger.hpp>
 #include <tf2/LinearMath/Matrix3x3.hpp>
 #include <tf2/LinearMath/Quaternion.hpp>
@@ -84,7 +85,13 @@ void rtt_rover_driver::RobotDriver::step() {
     return;
 
   for (size_t i = 0; i < motors_.size(); i++) {
-    rtU.actspeed[i] = wb_motor_get_velocity(motors_[i]);
+    auto pos = wb_position_sensor_get_value(motor_encoders_[i]);
+    auto speed_rad_s = pos - motor_positions_[i];
+    motor_positions_[i] = pos;
+    if (speed_rad_s < 0) {
+      speed_rad_s += M_PI + M_PI;
+    }
+    rtU.actspeed[i] = speed_rad_s / (M_PI + M_PI);
   }
 
   for (size_t i = 0; i < steering_.size(); i++) {
@@ -144,7 +151,7 @@ void rtt_rover_driver::RobotDriver::step() {
     // controlb is on scale 0V-24V
     // desspeed is for debugging
     if (!std::isnan(rtY.controlb[i])) {
-      wb_motor_set_velocity(motors_[i], rtY.controlb[i]);
+      wb_motor_set_velocity(motors_[i], rtY.controlb[i] * (M_PI + M_PI));
     }
   }
 
