@@ -46,7 +46,7 @@ Robot {
             RotationalMotor {
               name "left back steering motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           device2 [
@@ -56,7 +56,7 @@ Robot {
             RotationalMotor {
               name "left back wheel motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           endPoint Solid {
@@ -90,7 +90,7 @@ Robot {
             RotationalMotor {
               name "left middle wheel motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           endPoint Solid {
@@ -117,7 +117,7 @@ Robot {
             RotationalMotor {
               name "left front steering motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           device2 [
@@ -127,7 +127,7 @@ Robot {
             RotationalMotor {
               name "left front wheel motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           endPoint Solid {
@@ -161,7 +161,7 @@ Robot {
             RotationalMotor {
               name "right back steering motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           device2 [
@@ -171,7 +171,7 @@ Robot {
             RotationalMotor {
               name "right back wheel motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           endPoint Solid {
@@ -195,7 +195,7 @@ Robot {
             RotationalMotor {
               name "right middle wheel motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           endPoint Solid {
@@ -222,7 +222,7 @@ Robot {
             RotationalMotor {
               name "right front steering motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           device2 [
@@ -232,7 +232,7 @@ Robot {
             RotationalMotor {
               name "right front wheel motor"
               maxVelocity 1000000
-              maxTorque 1000000
+              maxTorque 15
             }
           ]
           endPoint Solid {
