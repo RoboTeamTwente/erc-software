@@ -274,6 +274,8 @@ Robot {
   name "Rover"
   boundingObject USE BODY
   physics Physics {
+    density -1
+    mass 75
   }
   controller "<extern>"
 }
