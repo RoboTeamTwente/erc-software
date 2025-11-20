@@ -63,7 +63,7 @@ void rtt_rover_driver::RobotDriver::init(
   }
 
   for (size_t i = 0; i < motors_.size(); i++) {
-    wb_motor_set_position(motors_[i], std::numeric_limits<double>::infinity());
+    wb_motor_set_position(motors_[i], INFINITY);
     wb_motor_set_velocity(motors_[i], 0);
     motor_encoders_[i] = wb_motor_get_position_sensor(motors_[i]);
     wb_position_sensor_enable(motor_encoders_[i], sample_rate_);
@@ -87,6 +87,12 @@ void rtt_rover_driver::RobotDriver::step() {
   if (wb_robot_get_time() * 1000 < sample_rate_)
     return;
 
+  //setting the actual speed
+  for (size_t i = 0; i < motors_.size(); i++){
+      rtU.actspeed[i] = wb_motor_get_velocity(motors_[i]);
+  }
+
+  /*
   for (size_t i = 0; i < motors_.size(); i++) {
     auto &ix = motor_position_ixs_[i];
     auto const ix1 = (ix + 1) % motor_positions_[i].size();
@@ -103,7 +109,9 @@ void rtt_rover_driver::RobotDriver::step() {
 
     ix = ix1;
   }
+  */
 
+  //getting the angle
   for (size_t i = 0; i < steering_.size(); i++) {
     rtU.actang[i] =
         wb_position_sensor_get_value(steering_encoders_[i]) * 180 / M_PI;
@@ -135,18 +143,17 @@ void rtt_rover_driver::RobotDriver::step() {
 
   rtU.alpha = yaw * 180 / M_PI;
   rtU.dist2goal = position.distance(goal_position);
-  rtU.R = 2; // std::abs(rtU.dist2goal / rtU.alpha * M_PI / 180);
 
   control_step();
 
   RCLCPP_INFO(node_->get_logger(),
               "\n"
-              "inputs: R=%lf alpha=%lf dist=%lf\n"
+              "inputs: alpha=%lf dist=%lf\n"
               "motors: [%lf %lf %lf %lf %lf %lf]\n"
               "speed: [%lf %lf %lf %lf %lf %lf] [%lf %lf %lf %lf %lf %lf]\n"
               "steering: [%lf %lf %lf %lf] [%lf %lf %lf %lf]\n"
               "GPS: %lf %lf %lf IMU: %lf %lf %lf",
-              rtU.R, rtU.alpha, rtU.dist2goal, //
+              rtU.alpha, rtU.dist2goal, //
               rtY.controlb[0], rtY.controlb[1], rtY.controlb[2],
               rtY.controlb[3], rtY.controlb[4], rtY.controlb[5], //
               rtU.actspeed[0], rtU.actspeed[1], rtU.actspeed[2],
