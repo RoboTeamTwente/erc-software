@@ -137,7 +137,9 @@ void rtt_rover_driver::RobotDriver::step() {
   rtU.dist2goal = position.distance(goal_position);
   rtU.R = 2; // std::abs(rtU.dist2goal / rtU.alpha * M_PI / 180);
 
-  control_step();
+  for (size_t i = 0; i < 10; i++) {
+    control_step();
+  }
 
   RCLCPP_INFO(node_->get_logger(),
               "\n"
