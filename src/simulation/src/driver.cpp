@@ -87,12 +87,14 @@ void rtt_rover_driver::RobotDriver::step() {
   if (wb_robot_get_time() * 1000 < sample_rate_)
     return;
 
-  //setting the actual speed
-  for (size_t i = 0; i < motors_.size(); i++){
-      rtU.actspeed[i] = wb_motor_get_velocity(motors_[i]);
-  }
+  //doing everyting 10 times for sample rate reasons
+  for(size_t q = 0; q < 10; q++){
 
   /*
+  for (size_t i = 0; i < motors_.size(); i++) {
+    rtU.actspeed[i] = wb_motor_get_velocity(motors_[i]);
+  }
+  */
   for (size_t i = 0; i < motors_.size(); i++) {
     auto &ix = motor_position_ixs_[i];
     auto const ix1 = (ix + 1) % motor_positions_[i].size();
@@ -109,28 +111,24 @@ void rtt_rover_driver::RobotDriver::step() {
 
     ix = ix1;
   }
-  */
 
   //getting the angle
   for (size_t i = 0; i < steering_.size(); i++) {
-    rtU.actang[i] =
-        wb_position_sensor_get_value(steering_encoders_[i]) * 180 / M_PI;
+    rtU.actang[i] = wb_position_sensor_get_value(steering_encoders_[i]);
   }
 
   auto position_raw = wb_gps_get_values(gps_);
   auto pose_raw = wb_inertial_unit_get_quaternion(imu_);
 
   tf2::Vector3 position{position_raw[0], position_raw[1], position_raw[2]};
-  tf2::Quaternion orientation{pose_raw[0], pose_raw[1], pose_raw[2],
-                              pose_raw[3]};
+  tf2::Quaternion orientation{pose_raw[0], pose_raw[1], pose_raw[2], pose_raw[3]};
 
   tf2::Vector3 goal_position;
   tf2::Quaternion goal_orientation;
   tf2::convert(goal_pose_.position, goal_position);
   tf2::convert(goal_pose_.orientation, goal_orientation);
 
-  tf2::Matrix3x3 relative_goal_orientation{
-      (orientation * goal_orientation.inverse()).normalized()};
+  tf2::Matrix3x3 relative_goal_orientation{(orientation * goal_orientation.inverse()).normalized()};
 
   tf2Scalar roll, pitch, yaw;
   relative_goal_orientation.getRPY(roll, pitch, yaw);
@@ -141,19 +139,20 @@ void rtt_rover_driver::RobotDriver::step() {
   tf2Scalar pr, pp, py;
   tf2::Matrix3x3{orientation}.getRPY(pr, pp, py);
 
-  rtU.alpha = yaw * 180 / M_PI;
+  //rtU.steerang = yaw;
+  rtU.steerang = (M_PI/2) - atan(position_raw[0] / position_raw[1]) - yaw;
   rtU.dist2goal = position.distance(goal_position);
 
   control_step();
 
   RCLCPP_INFO(node_->get_logger(),
               "\n"
-              "inputs: alpha=%lf dist=%lf\n"
+              "inputs: steerang=%lf dist=%lf\n"
               "motors: [%lf %lf %lf %lf %lf %lf]\n"
               "speed: [%lf %lf %lf %lf %lf %lf] [%lf %lf %lf %lf %lf %lf]\n"
               "steering: [%lf %lf %lf %lf] [%lf %lf %lf %lf]\n"
               "GPS: %lf %lf %lf IMU: %lf %lf %lf",
-              rtU.alpha, rtU.dist2goal, //
+              rtU.steerang, rtU.dist2goal, //
               rtY.controlb[0], rtY.controlb[1], rtY.controlb[2],
               rtY.controlb[3], rtY.controlb[4], rtY.controlb[5], //
               rtU.actspeed[0], rtU.actspeed[1], rtU.actspeed[2],
@@ -165,6 +164,17 @@ void rtt_rover_driver::RobotDriver::step() {
               position[0], position[1], position[2],                      //
               roll, pitch, yaw);
 
+  //setting velocity
+  //for (size_t i = 0; i < motors_.size(); i++) {
+  //    wb_motor_set_velocity(motors_[i], rtY.desspeed[i]);
+  //}
+  
+  for (size_t i = 0; i < motors_.size(); i++) {
+      wb_motor_set_velocity(motors_[i], rtY.controlb[i]);
+  }
+  
+
+  /*
   for (size_t i = 0; i < motors_.size(); i++) {
     // controlb is on scale 0V-24V
     // desspeed is for debugging
@@ -172,12 +182,15 @@ void rtt_rover_driver::RobotDriver::step() {
       wb_motor_set_velocity(motors_[i], rtY.controlb[i] / wheel_radius);
     }
   }
+  */
 
   for (size_t i = 0; i < steering_.size(); i++) {
     // desang is for debugging as well,
     // but I don't wanna parse PWM signals
     if (!std::isnan(rtY.desang[i])) {
-      wb_motor_set_position(steering_[i], -rtY.desang[i] * M_PI / 180);
+      wb_motor_set_position(steering_[i], (rtY.desang[i]));// * M_PI / 180));
     }
+  }
+
   }
 }
