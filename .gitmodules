@@ -1,0 +1,3 @@
+[submodule "src/rtt_rover_control/erc-control-steering"]
+	path = src/rtt_rover_control/erc-control-steering
+	url = git@github.com:RoboTeamTwente/erc-control-steering
