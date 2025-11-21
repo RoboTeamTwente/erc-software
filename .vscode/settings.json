@@ -1,6 +1,5 @@
 {
-  "cmake.sourceDirectory": "${workspaceFolder}/aruco-detection",
-  "cmake.buildDirectory": "${workspaceFolder}/aruco-detection/build",
+  "cmake.sourceDirectory": "${workspaceFolder}/src/aruco_detection",
   "cmake.generator": "Ninja",
   "cmake.configureOnOpen": true
 }

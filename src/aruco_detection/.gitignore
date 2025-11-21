@@ -1,0 +1,5 @@
+# dataset: ignore large datasets
+/dataset/
+/images/
+/calib_images/
+/build/
