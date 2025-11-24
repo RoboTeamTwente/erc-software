@@ -40,6 +40,7 @@ void rtt_rover_driver::RobotDriver::init(
   imu_ = wb_robot_get_device("inertial unit");
 
   wb_camera_enable(cam_, sample_rate_);
+  wb_camera_recognition_enable(cam_, sample_rate_);
   wb_gps_enable(gps_, sample_rate_);
   wb_inertial_unit_enable(imu_, sample_rate_);
 
