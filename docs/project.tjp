@@ -1,4 +1,4 @@
-project erc "Mars Rover" 2025-09-01 - 2026-08-29 {
+project erc "Mars Rover" 2025-08-31-22:00 - 2026-08-28-22:00 {
 	timezone "Europe/Amsterdam"
 	currency "EUR"
 	trackingscenario plan
