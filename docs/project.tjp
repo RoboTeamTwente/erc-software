@@ -1,6 +1,8 @@
-project erc "Mars Rover" 2025-11-26 - 2026-07-01 {
+project erc "Mars Rover" 2025-09-01 - 2026-08-29 {
 	timezone "Europe/Amsterdam"
 	currency "EUR"
+	trackingscenario plan
+	include "project-header.tji"
 }
 
 include "resources.tji"
@@ -61,6 +63,8 @@ task side "Side-projects" {
 		}
 	}
 }
+
+include "project-bookings.tji"
 
 taskreport breakdown "reports/breakdown" {
 	formats html
