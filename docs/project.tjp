@@ -49,7 +49,11 @@ task rover "Mars Rover" {
 task side "Side-projects" {
 	priority 300
 
-	task rfid "RFiD Tracker"
+	task rfid "RFiD Tracker" {
+		allocate andrei, candela, dmytro, narendra
+		effort 2m
+		complete 95
+	}
 
 	task landing "Landing Page" {
 		task survive "Migrate off Firebase" {
