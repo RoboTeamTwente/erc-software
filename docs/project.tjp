@@ -13,10 +13,8 @@ task rover "Mars Rover" {
 		allocate dmytro
 		limits { dailymax 4h }
 	}
-
 	task software "Software Development" {
 		depends rover.spec
-
 		task logic "Business Logic" {
 			allocate andrei, dmytro
 			task "Define tasks" { effort 1h }
@@ -52,13 +50,11 @@ task rover "Mars Rover" {
 
 task side "Side-projects" {
 	priority 300
-
 	task rfid "RFiD Tracker" {
 		allocate andrei, candela, dmytro, narendra
 		effort 2m
 		complete 95
 	}
-
 	task landing "Landing Page" {
 		task survive "Migrate off Firebase" {
 			priority 800
