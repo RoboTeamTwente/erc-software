@@ -3,12 +3,16 @@ supplement resource marijn {
 supplement resource devs {
 }
 supplement resource dmytro {
+	booking side.rfid 2025-09-01 - 2025-10-21 { sloppy 2 }
 }
 supplement resource andrei {
+	booking side.rfid 2025-09-01 - 2025-10-21 { sloppy 2 }
 }
 supplement resource candela {
+	booking side.rfid 2025-09-01 - 2025-10-21 { sloppy 2 }
 }
 supplement resource narendra {
+	booking side.rfid 2025-09-01 - 2025-10-21 { sloppy 2 }
 }
 supplement resource embedded {
 }
