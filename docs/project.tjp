@@ -46,7 +46,9 @@ task "Side-projects" {
 			effort 1w
 			allocate andrei, shishir
 			maxend 2026-01-01
-			limits { weeklymax 2h }
+			limits {
+				weeklymax 2h { resources andrei, shishir }
+			}
 		}
 	}
 }
