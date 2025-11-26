@@ -4,6 +4,7 @@ supplement resource devs {
 }
 supplement resource dmytro {
 	booking side.rfid 2025-09-01 - 2025-10-21 { sloppy 2 }
+	booking rover.sim 2025-10-21 - 2025-11-10 { sloppy 2 }
 }
 supplement resource andrei {
 	booking side.rfid 2025-09-01 - 2025-10-21 { sloppy 2 }

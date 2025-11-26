@@ -13,8 +13,12 @@ task rover "Mars Rover" {
 		allocate dmytro
 		limits { dailymax 4h }
 	}
+	task sim "Setup Simulation" {
+		duration 4w
+		allocate dmytro
+	}
 	task software "Software Development" {
-		depends rover.spec
+		depends rover.spec, rover.sim
 		task logic "Business Logic" {
 			allocate andrei, dmytro
 			task "Define tasks" { effort 1h }
