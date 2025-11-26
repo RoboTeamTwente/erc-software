@@ -20,6 +20,7 @@ task rover "Mars Rover" {
 		task logic "Business Logic" {
 			allocate andrei, dmytro
 			task "Define tasks" { effort 1h }
+			task "Set up a project" { effort 1w }
 		}
 		task nav "Path Planning" {
 			allocate dmytro
@@ -41,7 +42,10 @@ task rover "Mars Rover" {
 			allocate candela
 			task rust "Learn Rust" { effort 1m }
 			task tauri "Learn Tauri" { effort 2w }
-			task gui "Design the UI" { effort 2w }
+			task gui "Design the UI" {
+				depends !rust, !tauri
+				effort 2w
+			}
 		}
 	}
 }
