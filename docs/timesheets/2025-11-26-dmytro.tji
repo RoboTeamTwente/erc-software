@@ -1,0 +1,28 @@
+timesheet dmytro 2025-11-26 {
+
+	newtask side.setup_tj "Set up TaskJuggler" {
+		work 3h
+		remaining 0h
+	}
+
+	newtask cmt.events.check_new_base "Test repaired basestation" {
+		work 3h
+		remaining 0h
+		status green "All done" {
+			summary "Flashed a new Nucleo F7, works good"
+			details -8<-
+				* PlatformIO doesn't pin framework version by default, basestation needs ststm32 version 17.6.0
+				* Top hat pins were bent
+			->8-
+		}
+	}
+
+	newtask cmt.events.check_damage "Update robot management sheet" {
+		work 2h
+		remaining 0h
+		status yellow "Checked all robots that I could find" {
+			summary "I couldn't find some of the robots"
+		}
+	}
+
+}
