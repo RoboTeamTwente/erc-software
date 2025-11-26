@@ -29,7 +29,9 @@ task rover "Mars Rover" {
 		}
 		task base "Basestation" {
 			allocate candela
-			task "Set up a project" {effort 1w}
+			task rust "Learn Rust" { effort 1m }
+			task tauri "Learn Tauri" { effort 2w }
+			task gui "Design the UI" { effort 2w }
 		}
 	}
 }
