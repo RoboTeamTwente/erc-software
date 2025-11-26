@@ -36,10 +36,11 @@ task rover "Mars Rover" {
 	}
 }
 
-task "Side-projects" {
+task side "Side-projects" {
 	priority 300
 
 	task rfid "RFiD Tracker"
+
 	task landing "Landing Page" {
 		task survive "Migrate off Firebase" {
 			priority 800
