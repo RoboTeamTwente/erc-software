@@ -1,0 +1,52 @@
+resource marijn "Marijn Grashoff"
+
+resource devs "Software & AI" {
+	managers marijn
+	resource dmytro "Dmytro Khorsun"
+
+	managers dmytro
+	resource andrei "Andrei Badea"
+	resource candela "Candela Cimadevilla Gonzalez"
+	resource narendra "Narendra Setty"
+}
+
+resource embedded "Embedded" {
+	managers marijn
+	resource nick "Nikolaos Diamantopoulos"
+
+	managers nick
+	resource shishir "Shishir Sudeesh Nambiar"
+	resource lisa "Lisa te Braak"
+	resource irem "Irem Civginer"
+	resource jaron "Jaron Lendering"
+}
+
+resource electrical "Electrical" {
+	managers marijn
+	resource ernesto "Ernesto Castro Martín"
+
+	managers ernesto
+	resource janos "János Kátai"
+	resource sasha "Sasha Vyrovets"
+	resource renata "Renata Gonţa"
+}
+
+resource control "Control" {
+	managers marijn
+	resource ege "Ege Daglar"
+
+	managers ege
+	resource rowan "Rowan Ali"
+	resource mohammed "Mohammed Mosallam"
+	resource naren "Naren Niranjan"
+}
+
+resource mechanical "Mechanical" {
+	managers marijn
+	resource myrto "Myrto Pierrakou"
+
+	managers myrto
+	resource amr "Amr Soliman"
+	resource ludwig "Ludwig Franz Kumpf"
+	resource erik "Erik Rusnák"
+}
