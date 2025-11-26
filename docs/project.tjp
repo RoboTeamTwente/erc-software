@@ -55,8 +55,8 @@ task rover "Mars Rover" {
 task side "Side-projects" {
 	priority 300
 	task rfid "RFiD Tracker" {
-		allocate andrei, candela, dmytro, narendra
 		effort 2m
+		allocate andrei, candela, dmytro, narendra
 		complete 95
 	}
 	task landing "Landing Page" {
