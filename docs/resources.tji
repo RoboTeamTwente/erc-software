@@ -1,4 +1,7 @@
-resource marijn "Marijn Grashoff"
+resource mgmt "Management" {
+	resource marijn "Marijn Grashoff"
+	resource mariam "Mariam Adela Mosallam"
+}
 
 resource devs "Software & AI" {
 	managers marijn
