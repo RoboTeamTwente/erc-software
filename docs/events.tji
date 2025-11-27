@@ -1,0 +1,6 @@
+task events "Events Committee" {
+	task fix_basestation "Fix the Basestation" {
+		effort 3h
+		allocate dmytro
+	}
+}

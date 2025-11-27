@@ -1,0 +1,5 @@
+task rfid "RFiD Tracker" {
+	start 2025-09-01
+	end 2025-10-26
+	# allocate andrei, candela, dmytro, narendra
+}
