@@ -1,0 +1,11 @@
+task landing "Landing Page" {
+	task survive "Migrate off Firebase" {
+		priority 800
+		effort 1w
+		allocate andrei, shishir
+		maxend 2026-01-01
+		limits {
+			weeklymax 2h { resources andrei, shishir }
+		}
+	}
+}

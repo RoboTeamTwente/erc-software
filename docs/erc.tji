@@ -1,0 +1,44 @@
+task spec "Specify the project" {
+	effort 1w
+	allocate dmytro
+	limits { dailymax 4h }
+}
+
+task sim "Setup Simulation" {
+	duration 4w
+	allocate dmytro
+}
+
+task software "Software Development" {
+	depends rover.spec, rover.sim
+	task logic "Business Logic" {
+		allocate andrei, dmytro
+		task "Define tasks" { effort 1h }
+		task "Set up a project" { effort 1w }
+	}
+	task nav "Path Planning" {
+		allocate dmytro
+		task "Set up a project" { effort 1w }
+	}
+	task cv "Computer Vision" {
+		allocate andrei
+		task "Set up a project" { effort 1w }
+	}
+	task slam "SLAM" {
+		allocate candela, narendra
+		task "Set up a project" { effort 1w }
+	}
+	task comms "Communication" {
+		allocate narendra
+		task "Set up a project" { effort 1w }
+	}
+	task base "Basestation" {
+		allocate candela
+		task rust "Learn Rust" { effort 1m }
+		task tauri "Learn Tauri" { effort 2w }
+		task gui "Design the UI" {
+			depends !rust, !tauri
+			effort 2w
+		}
+	}
+}
