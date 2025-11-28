@@ -1,0 +1,70 @@
+# --------8<--------8<--------
+timesheet dmytro 2025-11-24-00:00-+0100 - 2025-12-01-00:00-+0100 {
+
+  # Vacation time: 40.0%
+
+  # Task: Setup Simulation
+  task rover.sim {
+    work 30.0%
+    end 2025-12-11-15:00-+0100
+    status green "A basic sim with Webots works" {
+    #  summary -8<-
+    #  A summary text
+    #  ->8-
+    #  details -8<-
+    #  Some more details
+    #  ->8-
+    #  flags ...
+    }
+  }
+
+  # Task: Specify the project
+  task rover.spec {
+    work 30.0%
+    remaining 3.5d
+    status green "Seems to work up to physical layer" {
+    #  summary -8<-
+    #  A summary text
+    #  ->8-
+    #  details -8<-
+    #  Some more details
+    #  ->8-
+    #  flags ...
+    }
+  }
+
+  # If you had unplanned tasks, uncomment and fill out the
+  # following lines:
+  # newtask new.task.id "A task title" {
+  #   work X%
+  #   remaining Y.Yd
+  #   status green "Your headline here!" {
+  #     summary -8<-
+  #     A summary text
+  #     ->8-
+  #     details -8<-
+  #     Some more details
+  #     ->8-
+  #     flags ...
+  #   }
+  # }
+
+  # You can use the following section to report personal notes.
+  # status green "Your headline here!" {
+  #   summary -8<-
+  #   A summary text
+  #   ->8-
+  #   details -8<-
+  #   Some more details
+  #   ->8-
+  # }
+  #
+  # Your upcoming tasks for the next period
+  # Please check them carefully and discuss any necessary
+  # changes with your manager or project manager!
+  #
+  # Setup Simulation: 50.0%
+  # Specify the project: 50.0%
+
+}
+# -------->8-------->8--------
