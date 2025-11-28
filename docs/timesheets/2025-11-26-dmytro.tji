@@ -5,7 +5,7 @@ timesheet dmytro 2025-11-26 {
 		remaining 0h
 	}
 
-	newtask cmt.events.check_new_base "Test repaired basestation" {
+	newtask cmt.events.fix_basestation "Fix the Basestation" {
 		work 3h
 		remaining 0h
 		status green "All done" {
