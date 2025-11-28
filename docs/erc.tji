@@ -10,13 +10,14 @@ task sim "Setup Simulation" {
 }
 
 task software "Software Development" {
-	depends rover.spec, rover.sim
 	task logic "Business Logic" {
+		depends rover.spec, rover.sim
 		allocate andrei, dmytro
 		task define "Define tasks" { effort 1h }
 		task setup "Set up a project" { effort 1w }
 	}
 	task nav "Path Planning" {
+		depends rover.spec, rover.sim
 		allocate dmytro
 		task setup "Set up a project" { effort 1w }
 	}
