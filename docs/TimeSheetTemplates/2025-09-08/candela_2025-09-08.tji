@@ -1,0 +1,63 @@
+# The status headline should be no more than 60 characters and may
+# not be empty! The status summary is optional and should be no
+# longer than one or two sentences of plain text. The details section
+# is also optional has no length limitation. You can use simple
+# markup in this section.  It is recommended that you provide at
+# least a summary or a details section.
+# See http://www.taskjuggler.org/tj3/manual/timesheet.html for details.
+#
+# --------8<--------8<--------
+timesheet candela 2025-09-01-00:00-+0200 - 2025-09-08-00:00-+0200 {
+
+  # Vacation time: 0.0%
+
+  # Task: RFiD Tracker
+  task side.rfid {
+    work 100.0%
+    end 2025-10-26-00:00-+0200
+    status green "Your headline here!" {
+    #  summary -8<-
+    #  A summary text
+    #  ->8-
+    #  details -8<-
+    #  Some more details
+    #  ->8-
+    #  flags ...
+    }
+  }
+
+  # If you had unplanned tasks, uncomment and fill out the
+  # following lines:
+  # newtask new.task.id "A task title" {
+  #   work X%
+  #   remaining Y.Yd
+  #   status green "Your headline here!" {
+  #     summary -8<-
+  #     A summary text
+  #     ->8-
+  #     details -8<-
+  #     Some more details
+  #     ->8-
+  #     flags ...
+  #   }
+  # }
+
+  # You can use the following section to report personal notes.
+  # status green "Your headline here!" {
+  #   summary -8<-
+  #   A summary text
+  #   ->8-
+  #   details -8<-
+  #   Some more details
+  #   ->8-
+  # }
+  #
+  # Your upcoming tasks for the next period
+  # Please check them carefully and discuss any necessary
+  # changes with your manager or project manager!
+  #
+  # RFiD Tracker: 100.0%
+
+}
+# -------->8-------->8--------
+
