@@ -52,8 +52,6 @@ supplement resource dmytro {
           2025-11-04-09:00-+0100 + 8.0h,
           2025-11-05-09:00-+0100 + 8.0h,
           2025-11-06-09:00-+0100 + 8.0h { overtime 2 }
-  booking rover.spec 2025-11-26-13:00-+0100 + 1.0h { overtime 2 }
-  booking committees.events.fix_basestation 2025-11-26-14:00-+0100 + 3.0h { overtime 2 }
 }
 supplement resource andrei {
   booking side.rfid 2025-09-01-09:00-+0200 + 8.0h,
@@ -92,7 +90,6 @@ supplement resource andrei {
           2025-10-16-09:00-+0200 + 8.0h,
           2025-10-17-09:00-+0200 + 8.0h,
           2025-10-20-09:00-+0200 + 8.0h { overtime 2 }
-  booking side.landing.survive 2025-11-26-13:00-+0100 + 2.0h { overtime 2 }
 }
 supplement resource candela {
   booking side.rfid 2025-09-01-09:00-+0200 + 8.0h,
@@ -175,7 +172,6 @@ supplement resource embedded {
 supplement resource nick {
 }
 supplement resource shishir {
-  booking side.landing.survive 2025-11-26-13:00-+0100 + 2.0h { overtime 2 }
 }
 supplement resource lisa {
 }
