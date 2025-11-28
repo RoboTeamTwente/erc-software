@@ -1,0 +1,78 @@
+# The status headline should be no more than 60 characters and may
+# not be empty! The status summary is optional and should be no
+# longer than one or two sentences of plain text. The details section
+# is also optional has no length limitation. You can use simple
+# markup in this section.  It is recommended that you provide at
+# least a summary or a details section.
+# See http://www.taskjuggler.org/tj3/manual/timesheet.html for details.
+#
+# --------8<--------8<--------
+timesheet dmytro 2025-11-24-00:00-+0100 - 2025-12-01-00:00-+0100 {
+
+  # Vacation time: 40.0%
+
+  # Task: Fix the Basestation
+  task committees.events.fix_basestation {
+    work 7.5%
+    remaining 0.0d
+    # status green "Your headline here!" {
+    #  summary -8<-
+    #  A summary text
+    #  ->8-
+    #  details -8<-
+    #  Some more details
+    #  ->8-
+    #  flags ...
+    # }
+  }
+
+  # Task: Specify the project
+  task rover.spec {
+    work 2.5%
+    remaining 4.9d
+    # status green "Your headline here!" {
+    #  summary -8<-
+    #  A summary text
+    #  ->8-
+    #  details -8<-
+    #  Some more details
+    #  ->8-
+    #  flags ...
+    # }
+  }
+
+  # If you had unplanned tasks, uncomment and fill out the
+  # following lines:
+  # newtask new.task.id "A task title" {
+  #   work X%
+  #   remaining Y.Yd
+  #   status green "Your headline here!" {
+  #     summary -8<-
+  #     A summary text
+  #     ->8-
+  #     details -8<-
+  #     Some more details
+  #     ->8-
+  #     flags ...
+  #   }
+  # }
+
+  # You can use the following section to report personal notes.
+  # status green "Your headline here!" {
+  #   summary -8<-
+  #   A summary text
+  #   ->8-
+  #   details -8<-
+  #   Some more details
+  #   ->8-
+  # }
+  #
+  # Your upcoming tasks for the next period
+  # Please check them carefully and discuss any necessary
+  # changes with your manager or project manager!
+  #
+  # Specify the project: 50.0%
+
+}
+# -------->8-------->8--------
+
