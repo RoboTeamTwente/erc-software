@@ -5,9 +5,7 @@ resource mgmt "Management" {
 
 resource devs "Software & AI" {
 	managers marijn
-	resource dmytro "Dmytro Khorsun" {
-		leaves sick 2025-11-27 +2d
-	}
+	resource dmytro "Dmytro Khorsun"
 
 	managers dmytro
 	resource andrei "Andrei Badea"
