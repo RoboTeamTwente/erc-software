@@ -14,7 +14,7 @@ include "erc.tji" { taskprefix rover }
 task committees "Committees"
 include "events.tji" { taskprefix committees }
 
-task side "Side-projects" { priority 300 }
+task side "Side-quests" { priority 300 }
 include "rfid.tji" { taskprefix side }
 include "landing.tji" { taskprefix side }
 
