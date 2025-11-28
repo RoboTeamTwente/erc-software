@@ -21,7 +21,7 @@ timesheet dmytro 2025-11-24-00:00-+0100 - 2025-12-01-00:00-+0100 {
   # Task: Specify the project
   task rover.spec {
     work 30.0%
-    remaining 3.5d
+    remaining 1w
     status green "Seems to work up to physical layer" {
     #  summary -8<-
     #  A summary text

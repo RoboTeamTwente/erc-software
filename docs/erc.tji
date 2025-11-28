@@ -1,5 +1,5 @@
 task spec "Specify the project" {
-	effort 1w
+	effort 1.3w
 	allocate dmytro
 	limits { dailymax 4h }
 }
