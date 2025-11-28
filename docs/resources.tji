@@ -1,55 +1,55 @@
 resource mgmt "Management" {
-	resource marijn "Marijn Grashoff"
-	resource mariam "Mariam Adela Mosallam"
+	resource marijn "Marijn Grashoff" { email "mp.grashoff@roboteamtwente.nl" }
+	resource mariam "Mariam Adela Mosallam" { email "madela@roboteamtwente.nl" }
 }
 
 resource devs "Software & AI" {
 	managers marijn
-	resource dmytro "Dmytro Khorsun"
+	resource dmytro "Dmytro Khorsun" { email "d.khorsun@roboteamtwente.nl" }
 
 	managers dmytro
-	resource andrei "Andrei Badea"
-	resource candela "Candela Cimadevilla Gonzalez"
-	resource narendra "Narendra Setty"
+	resource andrei "Andrei Badea" { email "a.badea@roboteamtwente.nl" }
+	resource candela "Candela Cimadevilla Gonzalez" { email "c.cimadevillagonzalez@roboteamtwente.nl" }
+	resource narendra "Narendra Setty" { email "n.setty@roboteamtwente.nl" }
 }
 
 resource embedded "Embedded" {
 	managers marijn
-	resource nick "Nikolaos Diamantopoulos"
+	resource nick "Nikolaos Diamantopoulos" { email "n.diamantopoulos@roboteamtwente.nl" }
 
 	managers nick
-	resource shishir "Shishir Sudeesh Nambiar"
-	resource lisa "Lisa te Braak"
-	resource irem "Irem Civginer"
-	resource jaron "Jaron Lendering"
+	resource shishir "Shishir Sudeesh Nambiar" { email "s.nambiar@roboteamtwente.nl" }
+	resource lisa "Lisa te Braak" { email "l.tebraak@roboteamtwente.nl" }
+	resource irem "Irem Civginer" { email "i.civginer@roboteamtwente.nl" }
+	resource jaron "Jaron Lendering" { email "j.h.j.lendering@roboteamtwente.nl" }
 }
 
 resource electrical "Electrical" {
 	managers marijn
-	resource ernesto "Ernesto Castro Martín"
+	resource ernesto "Ernesto Castro Martín" { email "e.c.m.castro@roboteamtwente.nl" }
 
 	managers ernesto
-	resource janos "János Kátai"
-	resource sasha "Sasha Vyrovets"
-	resource renata "Renata Gonţa"
+	resource janos "János Kátai" { email "j.katai@roboteamtwente.nl" }
+	resource sasha "Sasha Vyrovets" { email "o.vyrovets@roboteamtwente.nl" }
+	resource renata "Renata Gonţa" { email "rgonta@roboteamtwente.nl" }
 }
 
 resource control "Control" {
 	managers marijn
-	resource ege "Ege Daglar"
+	resource ege "Ege Daglar" { email "e.daglar@roboteamtwente.nl" }
 
 	managers ege
-	resource rowan "Rowan Ali"
-	resource mohammed "Mohammed Mosallam"
-	resource naren "Naren Niranjan"
+	resource rowan "Rowan Ali" { email "r.ali@roboteamtwente.nl" }
+	resource mohammed "Mohammed Mosallam" { email "mmosallam@roboteamtwente.nl" }
+	resource naren "Naren Niranjan" { email "n.niranjan@roboteamtwente.nl" }
 }
 
 resource mechanical "Mechanical" {
 	managers marijn
-	resource myrto "Myrto Pierrakou"
+	resource myrto "Myrto Pierrakou" { email "m.e.pierrakou@roboteamtwente.nl" }
 
 	managers myrto
-	resource amr "Amr Soliman"
-	resource ludwig "Ludwig Franz Kumpf"
-	resource erik "Erik Rusnák"
+	resource amr "Amr Soliman" { email "a.soliman@roboteamtwente.nl" }
+	resource ludwig "Ludwig Franz Kumpf" { email "l.j.franzkumpf@roboteamtwente.nl" }
+	resource erik "Erik Rusnák" { email "e.rusnak@roboteamtwente.nl" }
 }
