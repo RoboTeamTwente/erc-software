@@ -1,0 +1,49 @@
+macro TaskTip [
+  tooltip istask() -8<-
+    '''Start: ''' <-query attribute='start'->
+    '''End: ''' <-query attribute='end'->
+    ----
+    '''Resources:'''
+
+    <-query attribute='resources'->
+    ----
+    '''Precursors: '''
+
+    <-query attribute='precursors'->
+    ----
+    '''Followers: '''
+
+    <-query attribute='followers'->
+    ->8-
+]
+
+navigator navbar {
+	hidereport 0
+}
+
+taskreport overview "" {
+	columns bsi { title "WBS" },
+			name, start, end, effort,
+			chart { ${TaskTip} }
+}
+
+resourcereport resources "" {
+	columns no, name, effort, chart
+}
+
+icalreport "project"
+
+textreport frame "" {
+	header -8<-
+		== Mars Rover Project ==
+		<[navigator id="navbar"]>
+	->8-
+	textreport index "Overview" {
+		formats html
+		center '<[report id="overview"]>'
+	}
+	textreport resources "Resources" {
+		formats html
+		center '<[report id="resources"]>'
+	}
+}
