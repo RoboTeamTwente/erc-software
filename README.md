@@ -41,6 +41,14 @@ source install/local_setup.bash
 # activate ROS2
 source /opt/ros/kilted/setup.bash
 
+# Enable GPU in WSL2
+export GALLIUM_DRIVER=d3d12
+
+# You might or might not need to set this variable,
+# it switches between integrated (Intel) and discrete (NVIDIA) GPU.
+# Pick whatever makes it run faster.
+export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA
+
 # launch the simulation
 ros2 launch simulation simulation.launch.py
 ```
