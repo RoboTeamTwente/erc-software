@@ -15,7 +15,7 @@ timesheet dmytro 2025-09-01-00:00-+0200 - 2025-09-08-00:00-+0200 {
   task side.rfid {
     work 100.0%
     end 2025-10-26-00:00-+0200
-    status green "Your headline here!" {
+    status green "Going as planned" {
     #  summary -8<-
     #  A summary text
     #  ->8-
