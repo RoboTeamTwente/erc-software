@@ -35,8 +35,12 @@ colcon build
 source install/local_setup.bash
 ```
 
-4. Launch this project:
+4. Launch the simulation:
 
 ```bash
-# TODO
+# activate ROS2
+source /opt/ros/kilted/setup.bash
+
+# launch the simulation
+ros2 launch simulation simulation.launch.py
 ```
