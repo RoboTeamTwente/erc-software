@@ -6,7 +6,7 @@ WORKDIR /ws
 
 RUN git config --global --add safe.directory /ws
 ADD https://astral.sh/ruff/install.sh /tmp/install-ruff.sh
-RUN sh /tmp/install-ruff.sh
+RUN sh /tmp/install-ruff.sh && rm /tmp/install-ruff.sh
 
 ADD https://cyberbotics.com/Cyberbotics.asc /etc/apt/keyrings/Cyberbotics.asc
 RUN chown _apt /etc/apt/keyrings/Cyberbotics.asc
