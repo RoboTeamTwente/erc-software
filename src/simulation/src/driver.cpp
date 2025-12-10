@@ -87,14 +87,7 @@ void rtt_rover_driver::RobotDriver::step() {
   if (wb_robot_get_time() * 1000 < sample_rate_)
     return;
 
-  //doing everyting 10 times for sample rate reasons
-  for(size_t q = 0; q < 10; q++){
-
-  /*
-  for (size_t i = 0; i < motors_.size(); i++) {
-    rtU.actspeed[i] = wb_motor_get_velocity(motors_[i]);
-  }
-  */
+  //calculating and sending the speed of the wheels to the control system
   for (size_t i = 0; i < motors_.size(); i++) {
     auto &ix = motor_position_ixs_[i];
     auto const ix1 = (ix + 1) % motor_positions_[i].size();
@@ -105,9 +98,10 @@ void rtt_rover_driver::RobotDriver::step() {
     auto speed_rad_tick_window = pos[ix] - pos[ix1];
     auto speed_rad_tick = speed_rad_tick_window / motor_positions_[i].size();
     auto speed_rad_ms = speed_rad_tick / tick_ms_;
-    auto speed_m_ms = speed_rad_ms / wheel_radius;
-    auto speed_m_s = speed_m_ms * 1000;
-    rtU.actspeed[i] = speed_m_s;
+    //auto speed_m_ms = speed_rad_ms / wheel_radius;
+    //auto speed_m_s = speed_m_ms * 1000;
+    //rtU.actspeed[i] = speed_m_s;
+    rtU.actspeed[i] = speed_rad_ms * 1000;
 
     ix = ix1;
   }
@@ -165,14 +159,16 @@ void rtt_rover_driver::RobotDriver::step() {
               roll, pitch, yaw);
 
   //setting velocity
-  //for (size_t i = 0; i < motors_.size(); i++) {
-  //    wb_motor_set_velocity(motors_[i], rtY.desspeed[i]);
-  //}
-  
+  /*
+  for (size_t i = 0; i < motors_.size(); i++) {
+      wb_motor_set_velocity(motors_[i], rtY.desspeed[i]);
+  }
+  */
+
+  //setting velocity
   for (size_t i = 0; i < motors_.size(); i++) {
       wb_motor_set_velocity(motors_[i], rtY.controlb[i]);
   }
-  
 
   /*
   for (size_t i = 0; i < motors_.size(); i++) {
@@ -184,13 +180,12 @@ void rtt_rover_driver::RobotDriver::step() {
   }
   */
 
+  //setting steering angles
   for (size_t i = 0; i < steering_.size(); i++) {
     // desang is for debugging as well,
     // but I don't wanna parse PWM signals
     if (!std::isnan(rtY.desang[i])) {
-      wb_motor_set_position(steering_[i], (rtY.desang[i]));// * M_PI / 180));
+      wb_motor_set_position(steering_[i], (rtY.desang[i]));
     }
-  }
-
   }
 }
