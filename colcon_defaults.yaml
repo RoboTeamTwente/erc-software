@@ -2,6 +2,3 @@ build:
   symlink-install: true
   event-handlers:
     - console_cohesion+
-  mixin:
-    - compile-commands
-    - ninja
