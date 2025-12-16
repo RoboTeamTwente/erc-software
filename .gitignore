@@ -8,3 +8,4 @@
 
 # webots
 *.wbproj
+src/*/assets/worlds/*.jpg
