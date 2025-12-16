@@ -1,0 +1,7 @@
+.cache
+.git
+.jj
+build
+docs
+install
+log
