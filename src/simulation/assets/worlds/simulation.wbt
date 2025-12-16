@@ -27,7 +27,7 @@ RectangleArena {
   floorTileSize 5 5
 }
 Robot {
-  translation 0 0 0.3
+  translation -7.5 -2.5 0.3
   children [
     Pose {
       translation 0 0.35 -0.2
