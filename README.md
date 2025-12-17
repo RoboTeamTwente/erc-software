@@ -17,6 +17,10 @@ sudo dpkg -i /tmp/ros2-apt-source.deb
 # install ROS2
 sudo apt update
 sudo apt install ros-kilted-desktop
+
+# install colcon mixins
+colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
+colcon mixin update default
 ```
 
 3. Build this project:
