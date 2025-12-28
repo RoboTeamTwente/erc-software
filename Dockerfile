@@ -10,7 +10,6 @@ RUN sh /tmp/install-ruff.sh && rm /tmp/install-ruff.sh
 
 ADD https://github.com/helix-editor/helix/releases/download/25.07.1/helix_25.7.1-1_amd64.deb /tmp/helix.deb
 RUN apt-get install -y /tmp/helix.deb && rm /tmp/helix.deb
-RUN mkdir -p /root/.config/helix && ln -rs hx.toml /root/.config/helix/config.toml
 
 ADD https://cyberbotics.com/Cyberbotics.asc /etc/apt/keyrings/Cyberbotics.asc
 RUN chown _apt /etc/apt/keyrings/Cyberbotics.asc
