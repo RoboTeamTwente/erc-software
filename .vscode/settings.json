@@ -1,0 +1,5 @@
+{
+  "cmake.sourceDirectory": "${workspaceFolder}/src/aruco_detection",
+  "cmake.generator": "Ninja",
+  "cmake.configureOnOpen": true
+}
