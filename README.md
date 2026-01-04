@@ -44,7 +44,7 @@ source install/local_setup.bash
 
 ```bash
 # activate ROS2
-source /opt/ros/kilted/setup.bash
+source install/setup.bash
 
 # Enable GPU in WSL2
 export GALLIUM_DRIVER=d3d12
