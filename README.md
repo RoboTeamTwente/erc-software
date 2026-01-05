@@ -2,8 +2,6 @@
 
 ## Getting started
 
-After installing [WSL2 Ubuntu 24.04]() and [ROS2](),
-
 1. Install WSL2 with Ubuntu 24.04: `wsl --install -d Ubuntu-24.04`
 2. Install ROS2 in WSL:
 
