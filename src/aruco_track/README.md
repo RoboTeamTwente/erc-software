@@ -14,23 +14,32 @@ Every time you update the code within 'src/aruco_tf2_node.cpp' you must rebuild 
 
 ### Step 1 - Build
 
-```colcon build --packages-select aruco_track```
+```bash
+colcon build --packages-select aruco_track
+```
 
 ### Step 2 - Source the terminal
 
-```. ./install/setup.bash```
+```bash
+. ./install/setup.bash
+```
 
-```. /opt/ros/kilted/setup.bash```
+```bash
+. /opt/ros/kilted/setup.bash
+```
 
 ### Step 3 - Run the ROS2 Node
 
-```ros2 run aruco_track aruco_tf2_node```
+```bash
+ros2 run aruco_track aruco_tf2_node
+```
 
 ### Step 4 - Select Video Source
 
 Self explanatory based on the terminal print message:
 
-```=== ArUco Tracker ===
+```bash
+=== ArUco Tracker ===
 Select video source:
   [ENTER]  Use default USB camera (index 0)
   [0/1/2]  Use a different camera index
@@ -52,13 +61,17 @@ Unless you point the camera at a 5x5 (150mm) ArUco marker, the window will not a
 ### Step 5 - View Detected ArUco Poses
 
 You can run the following command to see the detected ArUco IDs and pose estimations right within your terminal, however **the aruco_tf2_node must be running in parallel in a separate terminal**:
-```ros2 topic echo /tf```
+
+```bash
+ros2 topic echo /tf
+```
 
 Alternatively, you can view the pose estimation with **rviz**.
 
 You can expect a simillar output:
 
-```---
+```bash
+---
 transforms:
 - header:
     stamp:
